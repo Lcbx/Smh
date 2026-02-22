@@ -1,0 +1,188 @@
+[gd_scene format=3 uid="uid://5oqmiagbtq8t"]
+
+[ext_resource type="PackedScene" uid="uid://ci3edjrovy8sf" path="res://env.tscn" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://dt11wq4wfcrif" path="res://gameplay.tscn" id="2_0xm2m"]
+
+[sub_resource type="GDScript" id="GDScript_7dm0k"]
+script/source = "@tool
+extends SubViewport
+
+@export var main_cam: Camera3D
+@export var background_cam: Camera3D
+@export var background_quad : MeshInstance3D
+@export var background_distance : float = -50
+@export var background_render_scale : float = 0.5
+
+@onready var main_viewport : Viewport = main_cam.get_viewport()
+
+func _init() -> void:
+	set_process(false)
+
+func _ready() -> void:
+	
+	# children meshes render only in background
+	for c in self.get_children().filter(func (x): return x is VisualInstance3D):
+		c.layers = self.canvas_cull_mask
+	
+	# example background animation
+	# anim 0 is reset
+	var anim = $AnimationPlayer.get_animation_list()[1]
+	$AnimationPlayer.play(anim)
+	
+	
+	# TODO: assign a shader that upscales/blurs the viewportTexture in background quad (instead of relying on costly DOF blur)
+	var update_size = func(): self.size = main_viewport.size * background_render_scale + Vector2(1, 1)
+	update_size.call()
+	main_viewport.size_changed.connect(update_size)
+	
+	set_process( (
+		main_cam != null and
+		background_cam != null and
+		background_quad != null ) )
+
+
+# sync background camera to match view of main
+func _process(_dt):
+	
+	background_cam.global_transform = main_cam.global_transform
+	background_cam.fov = main_cam.fov
+	
+	var vp_size: Vector2i = main_viewport.size
+	var aspect := float(vp_size.x) / float(vp_size.y)
+
+	var d = background_distance
+	var fov_y := deg_to_rad(main_cam.fov)
+
+	var height = -2.0 * d * tan(fov_y * 0.5)
+	var width = height * aspect
+
+	background_quad.transform.origin = Vector3(0, 0, d)
+	background_quad.mesh.size = Vector2(width, height) * 1.001
+"
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_ig7tw"]
+dof_blur_far_enabled = true
+dof_blur_far_distance = 50.0
+dof_blur_far_transition = 1.0
+dof_blur_amount = 0.03
+
+[sub_resource type="BoxMesh" id="BoxMesh_ig7tw"]
+size = Vector3(10, 10, 10)
+
+[sub_resource type="Animation" id="Animation_0xm2m"]
+length = 0.001
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("cube")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 34.875, -40)
+
+[sub_resource type="Animation" id="Animation_ig7tw"]
+resource_name = "cube_back_and_forth"
+length = 20.0
+loop_mode = 1
+step = 0.0333333
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("cube")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(1, 1, 50, 34.875, -40, 10.033334, 1, -50, 34.875, -40, 20, 1, 50, 34.875, -40)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0xm2m"]
+_data = {
+&"RESET": SubResource("Animation_0xm2m"),
+&"cube_back_and_forth": SubResource("Animation_ig7tw")
+}
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_ig7tw"]
+viewport_path = NodePath("background_viewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h2yge"]
+resource_local_to_scene = true
+shading_mode = 0
+albedo_texture = SubResource("ViewportTexture_ig7tw")
+disable_receive_shadows = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_ig7tw"]
+size = Vector2(184.492, 100.100006)
+
+[sub_resource type="BoxMesh" id="BoxMesh_7dm0k"]
+size = Vector3(30, 5, 15)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ig7tw"]
+albedo_color = Color(0.1728327, 0.17283267, 0.17283267, 1)
+metallic = 0.2
+metallic_specular = 0.4
+
+[sub_resource type="QuadMesh" id="QuadMesh_0xm2m"]
+size = Vector2(50, 30)
+center_offset = Vector3(0, 7, 0)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_0xm2m"]
+viewport_path = NodePath("gameplay_viewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1bvp3"]
+resource_local_to_scene = true
+transparency = 1
+shading_mode = 0
+albedo_texture = SubResource("ViewportTexture_0xm2m")
+disable_receive_shadows = true
+
+[node name="Root" type="Node3D" unique_id=1564308910]
+
+[node name="background_viewport" type="SubViewport" parent="." unique_id=1834230623 node_paths=PackedStringArray("main_cam", "background_cam", "background_quad")]
+use_hdr_2d = true
+scaling_3d_scale = 2.0
+canvas_cull_mask = 4293918722
+size = Vector2i(899, 488)
+script = SubResource("GDScript_7dm0k")
+main_cam = NodePath("../main_camera")
+background_cam = NodePath("Camera3D")
+background_quad = NodePath("../main_camera/background")
+
+[node name="Camera3D" type="Camera3D" parent="background_viewport" unique_id=2110186822]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15, 25)
+cull_mask = 2
+attributes = SubResource("CameraAttributesPractical_ig7tw")
+fov = 90.0
+
+[node name="cube" type="MeshInstance3D" parent="background_viewport" unique_id=106361826]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 34.875, -40)
+layers = 4293918722
+mesh = SubResource("BoxMesh_ig7tw")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="background_viewport" unique_id=1213560258]
+libraries/ = SubResource("AnimationLibrary_0xm2m")
+
+[node name="Env" parent="." unique_id=353231663 instance=ExtResource("1_ig7tw")]
+
+[node name="main_camera" type="Camera3D" parent="." unique_id=242030287]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 15, 25)
+cull_mask = 1048573
+current = true
+fov = 90.0
+
+[node name="background" type="MeshInstance3D" parent="main_camera" unique_id=1936995365]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -50)
+material_override = SubResource("StandardMaterial3D_h2yge")
+cast_shadow = 0
+mesh = SubResource("QuadMesh_ig7tw")
+surface_material_override/0 = SubResource("StandardMaterial3D_h2yge")
+
+[node name="arena" type="MeshInstance3D" parent="." unique_id=246113640]
+mesh = SubResource("BoxMesh_7dm0k")
+surface_material_override/0 = SubResource("StandardMaterial3D_ig7tw")
+
+[node name="gameplay_debug" type="MeshInstance3D" parent="." unique_id=2051621781]
+mesh = SubResource("QuadMesh_0xm2m")
+surface_material_override/0 = SubResource("StandardMaterial3D_1bvp3")
+
+[node name="gameplay_viewport" type="SubViewport" parent="." unique_id=1765000225]
+transparent_bg = true
+size = Vector2i(1600, 1080)
+
+[node name="Root" parent="gameplay_viewport" unique_id=1757507555 instance=ExtResource("2_0xm2m")]
