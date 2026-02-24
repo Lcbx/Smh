@@ -108,7 +108,7 @@ albedo_texture = SubResource("ViewportTexture_ig7tw")
 disable_receive_shadows = true
 
 [sub_resource type="QuadMesh" id="QuadMesh_ig7tw"]
-size = Vector2(184.492, 100.100006)
+size = Vector2(100.100006, 100.100006)
 
 [sub_resource type="BoxMesh" id="BoxMesh_7dm0k"]
 size = Vector3(30, 5, 15)
@@ -138,14 +138,14 @@ disable_receive_shadows = true
 use_hdr_2d = true
 scaling_3d_scale = 2.0
 canvas_cull_mask = 4293918722
-size = Vector2i(899, 488)
+size = Vector2i(2, 2)
 script = SubResource("GDScript_7dm0k")
 main_cam = NodePath("../main_camera")
 background_cam = NodePath("Camera3D")
 background_quad = NodePath("../main_camera/background")
 
 [node name="Camera3D" type="Camera3D" parent="background_viewport" unique_id=2110186822]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15, 25)
+transform = Transform3D(1, 0, 0, 0, 0.9961947, -0.087155744, 0, 0.08715574, 0.9961947, 0, 7, 15)
 cull_mask = 2
 attributes = SubResource("CameraAttributesPractical_ig7tw")
 fov = 90.0
@@ -161,7 +161,7 @@ libraries/ = SubResource("AnimationLibrary_0xm2m")
 [node name="Env" parent="." unique_id=353231663 instance=ExtResource("1_ig7tw")]
 
 [node name="main_camera" type="Camera3D" parent="." unique_id=242030287]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 15, 25)
+transform = Transform3D(0.99999994, 0, 0, 0, 0.9961947, -0.08715573, 0, 0.08715574, 0.99619466, 0, 7, 15)
 cull_mask = 1048573
 current = true
 fov = 90.0
@@ -178,6 +178,7 @@ mesh = SubResource("BoxMesh_7dm0k")
 surface_material_override/0 = SubResource("StandardMaterial3D_ig7tw")
 
 [node name="gameplay_debug" type="MeshInstance3D" parent="." unique_id=2051621781]
+transform = Transform3D(1, 0, 0, 0, 0.9945219, -0.104528464, 0, 0.104528464, 0.9945219, 0, 0, 0)
 mesh = SubResource("QuadMesh_0xm2m")
 surface_material_override/0 = SubResource("StandardMaterial3D_1bvp3")
 
