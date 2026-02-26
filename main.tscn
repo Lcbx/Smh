@@ -7,9 +7,9 @@
 script/source = "@tool
 extends SubViewport
 
-@export var main_cam: Camera3D
-@export var background_cam: Camera3D
-@export var background_quad : MeshInstance3D
+@onready var main_cam: Camera3D = $\"../main_camera\"
+@onready var background_cam: Camera3D = $Camera3D
+@onready var background_quad : MeshInstance3D = $\"../main_camera/background\"
 @export var background_distance : float = -50
 @export var background_render_scale : float = 0.5
 
@@ -108,7 +108,7 @@ albedo_texture = SubResource("ViewportTexture_ig7tw")
 disable_receive_shadows = true
 
 [sub_resource type="QuadMesh" id="QuadMesh_ig7tw"]
-size = Vector2(100.100006, 100.100006)
+size = Vector2(184.492, 100.100006)
 
 [sub_resource type="BoxMesh" id="BoxMesh_7dm0k"]
 size = Vector3(30, 5, 15)
@@ -134,15 +134,12 @@ disable_receive_shadows = true
 
 [node name="Root" type="Node3D" unique_id=1564308910]
 
-[node name="background_viewport" type="SubViewport" parent="." unique_id=1834230623 node_paths=PackedStringArray("main_cam", "background_cam", "background_quad")]
+[node name="background_viewport" type="SubViewport" parent="." unique_id=1834230623]
 use_hdr_2d = true
 scaling_3d_scale = 2.0
 canvas_cull_mask = 4293918722
-size = Vector2i(2, 2)
+size = Vector2i(899, 488)
 script = SubResource("GDScript_7dm0k")
-main_cam = NodePath("../main_camera")
-background_cam = NodePath("Camera3D")
-background_quad = NodePath("../main_camera/background")
 
 [node name="Camera3D" type="Camera3D" parent="background_viewport" unique_id=2110186822]
 transform = Transform3D(1, 0, 0, 0, 0.9961947, -0.087155744, 0, 0.08715574, 0.9961947, 0, 7, 15)
