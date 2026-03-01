@@ -1,0 +1,106 @@
+[gd_scene format=4 uid="uid://dt11wq4wfcrif"]
+
+[ext_resource type="Script" uid="uid://sb84caan4i1k" path="res://scripts/input.gd" id="1_1qy1k"]
+[ext_resource type="Script" uid="uid://dhdc4b8yddyej" path="res://addons/rmsmartshape/shapes/shape.gd" id="1_cbffv"]
+[ext_resource type="Script" uid="uid://bwcf4pjgprn0k" path="res://addons/rmsmartshape/shapes/point.gd" id="2_fbudy"]
+[ext_resource type="Script" uid="uid://bo5f7qe27jfje" path="res://addons/rmsmartshape/shapes/point_array.gd" id="3_0m7cd"]
+[ext_resource type="Script" uid="uid://llobjh5hvry" path="res://addons/rmsmartshape/shapes/mesh.gd" id="4_2ihbs"]
+[ext_resource type="Script" uid="uid://0lhxan4cqrc1" path="res://addons/rmsmartshape/materials/edge_material_metadata.gd" id="5_1qy1k"]
+[ext_resource type="Script" uid="uid://nc5bfedvnpgm" path="res://addons/rmsmartshape/materials/shape_material.gd" id="6_3n40r"]
+[ext_resource type="PackedScene" uid="uid://d078tyktno1fs" path="res://scenes/character.tscn" id="8_0m7cd"]
+
+[sub_resource type="Resource" id="Resource_5vw27"]
+script = ExtResource("2_fbudy")
+position = Vector2(325.67175, 722.4176)
+
+[sub_resource type="Resource" id="Resource_kek77"]
+script = ExtResource("2_fbudy")
+position = Vector2(1275.1536, 722.4178)
+
+[sub_resource type="Resource" id="Resource_4c57u"]
+script = ExtResource("2_fbudy")
+position = Vector2(1281.01, 858.57916)
+
+[sub_resource type="Resource" id="Resource_efxa6"]
+script = ExtResource("2_fbudy")
+position = Vector2(321.27954, 859.4728)
+
+[sub_resource type="Resource" id="Resource_dg77c"]
+script = ExtResource("2_fbudy")
+position = Vector2(325.67175, 722.4176)
+
+[sub_resource type="Resource" id="Resource_45aep"]
+script = ExtResource("3_0m7cd")
+_points = {
+0: SubResource("Resource_5vw27"),
+1: SubResource("Resource_kek77"),
+2: SubResource("Resource_4c57u"),
+3: SubResource("Resource_efxa6"),
+4: SubResource("Resource_dg77c")
+}
+_point_order = PackedInt32Array(0, 1, 2, 3, 4)
+_constraints = {
+Vector2i(0, 4): 15
+}
+_next_key = 6
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_w48qg"]
+_surfaces = [{
+"aabb": AABB(321.27954, 722.4176, 0, 959.73047, 137.05518, 1e-05),
+"attribute_data": PackedByteArray("/////+pkH0C9mrQ/6mQfQL2atD//////UiAgQBGl1j9SICBAEaXWP//////IoyA/Qt7WP8ijID9C3tY///////zVIj+6mrQ//NUiP7qatD8="),
+"format": 34359742527,
+"index_count": 9,
+"index_data": PackedByteArray("AAABAAIAAgADAAMAAwAAAAIA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray("6mSfRL2aNEQAAAAAUiCgRBGlVkQAAAAAyKOgQ0LeVkQAAAAA/NWiQ7qaNEQAAAAA/////////7//////////v/////////+//////////78=")
+}]
+
+[sub_resource type="Gradient" id="Gradient_vivmo"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_2cqfq"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_yaehf"]
+noise = SubResource("FastNoiseLite_2cqfq")
+color_ramp = SubResource("Gradient_vivmo")
+seamless = true
+
+[sub_resource type="Resource" id="Resource_074og"]
+script = ExtResource("4_2ihbs")
+texture = SubResource("NoiseTexture2D_yaehf")
+mesh = SubResource("ArrayMesh_w48qg")
+z_index = -10
+
+[sub_resource type="Resource" id="Resource_tyrfw"]
+script = ExtResource("6_3n40r")
+fill_textures = Array[Texture2D]([SubResource("NoiseTexture2D_yaehf")])
+metadata/_custom_type_script = "uid://nc5bfedvnpgm"
+
+[node name="Root" type="Node2D" unique_id=1757507555]
+script = ExtResource("1_1qy1k")
+
+[node name="Label" type="Label" parent="." unique_id=888000824]
+offset_right = 40.0
+offset_bottom = 49.0
+text = "TEST
+"
+
+[node name="Stage" type="StaticBody2D" parent="." unique_id=1444414146]
+position = Vector2(2, -23)
+
+[node name="SS2D_Shape" type="Node2D" parent="Stage" unique_id=1480355260]
+script = ExtResource("1_cbffv")
+_points = SubResource("Resource_45aep")
+_meshes = Array[ExtResource("4_2ihbs")]([SubResource("Resource_074og")])
+render_edges = false
+shape_material = SubResource("Resource_tyrfw")
+collision_polygon_node_path = NodePath("../CollisionPolygon2D")
+metadata/_custom_type_script = "uid://dhdc4b8yddyej"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Stage" unique_id=36179280]
+visible = false
+polygon = PackedVector2Array(325.67175, 722.4176, 1275.1536, 722.4178, 1281.01, 858.57916, 321.27954, 859.4728)
+
+[node name="Character" parent="." unique_id=610269851 instance=ExtResource("8_0m7cd")]
+position = Vector2(595, 615)

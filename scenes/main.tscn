@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://5oqmiagbtq8t"]
 
-[ext_resource type="PackedScene" uid="uid://ci3edjrovy8sf" path="res://env.tscn" id="1_ig7tw"]
-[ext_resource type="PackedScene" uid="uid://dt11wq4wfcrif" path="res://gameplay.tscn" id="2_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://ci3edjrovy8sf" path="res://scenes/env.tscn" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://dt11wq4wfcrif" path="res://scenes/gameplay.tscn" id="2_0xm2m"]
 
 [sub_resource type="GDScript" id="GDScript_7dm0k"]
 script/source = "@tool
