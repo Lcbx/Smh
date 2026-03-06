@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://ci3edjrovy8sf" path="res://scenes/env.tscn" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://dt11wq4wfcrif" path="res://scenes/gameplay.tscn" id="2_0xm2m"]
+[ext_resource type="Shader" uid="uid://b1q2pv0uylybp" path="res://scripts/background.gdshader" id="2_sugp2"]
 
 [sub_resource type="GDScript" id="GDScript_7dm0k"]
 script/source = "@tool
@@ -11,7 +12,6 @@ extends SubViewport
 @onready var background_cam: Camera3D = $Camera3D
 @onready var background_quad : MeshInstance3D = $\"../main_camera/background\"
 @export var background_distance : float = -50
-@export var background_render_scale : float = 0.5
 
 @onready var main_viewport : Viewport = main_cam.get_viewport()
 
@@ -28,12 +28,6 @@ func _ready() -> void:
 	# anim 0 is reset
 	var anim = $AnimationPlayer.get_animation_list()[1]
 	$AnimationPlayer.play(anim)
-	
-	
-	# TODO: assign a shader that upscales/blurs the viewportTexture in background quad (instead of relying on costly DOF blur)
-	var update_size = func(): self.size = main_viewport.size * background_render_scale + Vector2(1, 1)
-	update_size.call()
-	main_viewport.size_changed.connect(update_size)
 	
 	set_process( (
 		main_cam != null and
@@ -101,14 +95,22 @@ _data = {
 [sub_resource type="ViewportTexture" id="ViewportTexture_ig7tw"]
 viewport_path = NodePath("background_viewport")
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sugp2"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("2_sugp2")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/texture_albedo = SubResource("ViewportTexture_ig7tw")
+
+[sub_resource type="QuadMesh" id="QuadMesh_ig7tw"]
+size = Vector2(100.100006, 100.100006)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h2yge"]
 resource_local_to_scene = true
 shading_mode = 0
 albedo_texture = SubResource("ViewportTexture_ig7tw")
+texture_filter = 0
 disable_receive_shadows = true
-
-[sub_resource type="QuadMesh" id="QuadMesh_ig7tw"]
-size = Vector2(184.492, 100.100006)
 
 [sub_resource type="BoxMesh" id="BoxMesh_7dm0k"]
 size = Vector3(30, 5, 15)
@@ -135,10 +137,10 @@ disable_receive_shadows = true
 [node name="Root" type="Node3D" unique_id=1564308910]
 
 [node name="background_viewport" type="SubViewport" parent="." unique_id=1834230623]
+msaa_3d = 1
 use_hdr_2d = true
-scaling_3d_scale = 2.0
 canvas_cull_mask = 4293918722
-size = Vector2i(899, 488)
+size = Vector2i(720, 720)
 script = SubResource("GDScript_7dm0k")
 
 [node name="Camera3D" type="Camera3D" parent="background_viewport" unique_id=2110186822]
@@ -165,7 +167,7 @@ fov = 90.0
 
 [node name="background" type="MeshInstance3D" parent="main_camera" unique_id=1936995365]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -50)
-material_override = SubResource("StandardMaterial3D_h2yge")
+material_override = SubResource("ShaderMaterial_sugp2")
 cast_shadow = 0
 mesh = SubResource("QuadMesh_ig7tw")
 surface_material_override/0 = SubResource("StandardMaterial3D_h2yge")

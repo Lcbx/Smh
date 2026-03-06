@@ -4,6 +4,7 @@ extends CharacterBody2D
 @onready var animation_player: AnimationPlayer = %AnimationPlayer
 @onready var ground_check: RayCast2D = %ground_check
 @onready var sprite: Node2D = %sprite
+@onready var collision: Node2D = $CollisionPolygon2D
 
 func _ready() -> void:
 	animation_player.play("idle")
@@ -13,7 +14,7 @@ var jump_requested := false
 var acceleration := Vector2.ZERO
 
 #TODO: create abstract class for State
-@onready var state = $GroundedState
+@onready var state = %GroundState
 signal input
 
 func _physics_process(delta: float) -> void:
@@ -32,8 +33,18 @@ func is_grounded():
 func ground_distance() -> float:
 	return (ground_check.global_position + ground_check.target_position - ground_check.get_collision_point()).y
 
-func apply_movement(speed : Vector2, half_acceleration : Vector2) -> void:
-	# applying half acceleration before + after movement makes for a better integration of the force
-	velocity = speed + half_acceleration
+func apply_movement(speed : Vector2, half_acceleration : Vector2, max_horizontal_speed := 1000.0 ) -> void:
+	# half acceleration before + after movement makes for a better integration of the force
+	speed = speed + half_acceleration
+	speed.x = clampf(speed.x, -max_horizontal_speed, max_horizontal_speed)
+	velocity = speed
+	#print("velocity", velocity)
 	move_and_slide()
 	velocity += half_acceleration
+
+var swap := false
+func animate(name:String, strength:float=1.0)->void:
+	var speed = lerp(0.4, 1.0, strength)
+	var blend = lerp(0.0, 1.0, strength)
+	animation_player.play(name, blend, speed)
+	#print("play", name, blend, speed)

@@ -12,48 +12,49 @@
 
 [sub_resource type="Resource" id="Resource_eod45"]
 script = ExtResource("3_jb3kq")
-position = Vector2(-5.3406982, -52.00226)
+position = Vector2(-5.0510406, -51.13327)
 
 [sub_resource type="Resource" id="Resource_fbudy"]
 script = ExtResource("3_jb3kq")
-position = Vector2(-25.55841, -34.857788)
+position = Vector2(-33.958664, -26.747177)
 
 [sub_resource type="Resource" id="Resource_0m7cd"]
 script = ExtResource("3_jb3kq")
-position = Vector2(-10.963013, 29.757996)
+position = Vector2(-14.728638, 36.130615)
 
 [sub_resource type="Resource" id="Resource_2ihbs"]
 script = ExtResource("3_jb3kq")
-position = Vector2(18.156677, 30.120483)
+position = Vector2(22.791306, 36.493103)
 texture_idx = 1
 
 [sub_resource type="Resource" id="Resource_1qy1k"]
 script = ExtResource("3_jb3kq")
-position = Vector2(25.410706, -31.211365)
+position = Vector2(39.31459, -29.183708)
 
 [sub_resource type="Resource" id="Resource_3n40r"]
 script = ExtResource("3_jb3kq")
-position = Vector2(-5.3406982, -52.00226)
+position = Vector2(-5.0510406, -51.13327)
 
 [sub_resource type="Resource" id="Resource_eglai"]
 script = ExtResource("3_jb3kq")
-position = Vector2(-7.591614, -39.42151)
+position = Vector2(-9.619263, -35.655876)
+texture_idx = -3
 
 [sub_resource type="Resource" id="Resource_m1ld8"]
 script = ExtResource("3_jb3kq")
-position = Vector2(11.293518, -52.01172)
+position = Vector2(11.00386, -52.301384)
 
 [sub_resource type="Resource" id="Resource_7y1a3"]
 script = ExtResource("3_jb3kq")
-position = Vector2(13.271851, -36.543823)
+position = Vector2(17.616806, -33.936844)
 
 [sub_resource type="Resource" id="Resource_2em84"]
 script = ExtResource("3_jb3kq")
-position = Vector2(15.96991, 1.5862427)
+position = Vector2(18.576889, 4.4828873)
 
 [sub_resource type="Resource" id="Resource_0kugc"]
 script = ExtResource("3_jb3kq")
-position = Vector2(-11.188843, 0.8668823)
+position = Vector2(-14.954483, 3.4738617)
 
 [sub_resource type="Resource" id="Resource_nwk8b"]
 script = ExtResource("4_c1b4b")
@@ -1556,10 +1557,10 @@ tracks/23/path = NodePath("sprite/torso:position")
 tracks/23/interp = 1
 tracks/23/loop_wrap = true
 tracks/23/keys = {
-"times": PackedFloat32Array(0.09683108, 0.5047383, 0.66217613, 0.76666665),
+"times": PackedFloat32Array(0, 0.09683108, 0.5047383, 0.6),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(4, -25), Vector2(4, -16), Vector2(4, -22), Vector2(3, -20)]
+"values": [Vector2(2, -10), Vector2(4, -20), Vector2(4, -10), Vector2(4, -20)]
 }
 tracks/24/type = "value"
 tracks/24/imported = false
@@ -1588,16 +1589,18 @@ script = ExtResource("1_wdpcj")
 
 [node name="SS2D_Shape" type="Node2D" parent="." unique_id=1827987772]
 z_index = -10
-position = Vector2(1, 5)
 script = ExtResource("2_qi5as")
 _points = SubResource("Resource_nwk8b")
 shape_material = SubResource("Resource_x2ust")
 collision_polygon_node_path = NodePath("../CollisionPolygon2D")
 metadata/_custom_type_script = "uid://dhdc4b8yddyej"
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=62340664]
-position = Vector2(11, -31)
-polygon = PackedVector2Array(-15.340698, -16.002258, 1.2935181, -16.011719, 3.2718506, -0.54382324, 15.410706, 4.7886353, 5.9699097, 37.586243, 8.156677, 66.12048, -20.963013, 65.757996, -21.188843, 36.866882, -35.55841, 1.1422119, -17.591614, -3.4215088)
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=2117308498]
+polygon = PackedVector2Array(-5.0510406, -51.13327, 11.00386, -52.301384, 17.616806, -33.936844, 39.31459, -29.183708, 18.576889, 4.4828873, 22.791306, 36.493103, -14.728638, 36.130615, -14.954483, 3.4738617, -33.958664, -26.747177, -9.619263, -35.655876)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=160804102]
+unique_name_in_owner = true
+libraries/ = SubResource("AnimationLibrary_0m7cd")
 
 [node name="sprite" type="Node2D" parent="." unique_id=1239840786]
 unique_name_in_owner = true
@@ -1635,7 +1638,6 @@ region_enabled = true
 region_rect = Rect2(350.21576, 392.77686, 144.62811, 109.91736)
 
 [node name="upper_arm_R" type="Sprite2D" parent="sprite/torso" unique_id=1869904316]
-z_index = 1
 position = Vector2(-76.666626, -23.333252)
 scale = Vector2(0.9, 0.9)
 texture = ExtResource("7_x1sy7")
@@ -1643,7 +1645,6 @@ region_enabled = true
 region_rect = Rect2(376.66205, 17.570229, 109.09088, 152.89258)
 
 [node name="lower_arm_R" type="Sprite2D" parent="sprite/torso/upper_arm_R" unique_id=165495380]
-z_index = 1
 position = Vector2(25.925781, 81.481445)
 scale = Vector2(1, 1.2)
 texture = ExtResource("7_x1sy7")
@@ -1687,11 +1688,7 @@ unique_name_in_owner = true
 position = Vector2(1, 34)
 target_position = Vector2(0, 55)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=160804102]
-unique_name_in_owner = true
-libraries/ = SubResource("AnimationLibrary_0m7cd")
-
-[node name="GroundedState" type="Node2D" parent="." unique_id=1141125736]
+[node name="GroundState" type="Node2D" parent="." unique_id=1141125736]
 unique_name_in_owner = true
 script = ExtResource("8_sm1rv")
 
