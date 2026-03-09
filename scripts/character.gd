@@ -44,11 +44,17 @@ func is_grounded() -> bool:
 func ground_distance() -> float:
 	return (ground_check.global_position + ground_check.target_position - ground_check.get_collision_point()).y
 
-func apply_movement(speed : Vector2, half_acceleration : Vector2, max_horizontal_speed := 1000.0 ) -> void:
+func apply_movement(speed : Vector2, half_acceleration : Vector2, max_horizontal_speed:float) -> void:
 	# half acceleration before + after movement makes for a better integration of the force
-	speed = speed + half_acceleration
-	speed.x = clampf(speed.x, -max_horizontal_speed, max_horizontal_speed)
+	speed.y += half_acceleration.y
+	speed.x = move_toward(speed.x, sign(half_acceleration.x) * max_horizontal_speed, abs(half_acceleration.x))
 	velocity = speed
+	
+	# would help with DI while launched
+	#if abs(velocity.x) > max_horizontal_speed:
+	#	half_acceleration.x = - sign(velocity.x) * abs(half_acceleration.x)
+	
+	#print("accleration ", half_acceleration)
 	#print("velocity ", velocity)
 	#print("position ", position)
 	move_and_slide()

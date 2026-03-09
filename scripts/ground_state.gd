@@ -1,7 +1,7 @@
 extends Node2D
 
 @export var SPEED := 450.0
-@export var JUMP_HEIGHT := 250
+@export var JUMP_HEIGHT := 330
 @export var ACCELERATION := 2000.0
 const ON_GROUND_MARGIN := 5.0
 const GROUND_DISPLACEMENT := 300.0

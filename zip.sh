@@ -1,0 +1,1 @@
+tar -cvzf ~/Desktop/Godot4_SSB.gz ../SSB_clone

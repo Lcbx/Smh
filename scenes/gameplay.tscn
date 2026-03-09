@@ -78,7 +78,6 @@ fill_textures = Array[Texture2D]([SubResource("NoiseTexture2D_yaehf")])
 metadata/_custom_type_script = "uid://nc5bfedvnpgm"
 
 [node name="Root" type="Node2D" unique_id=1757507555]
-position = Vector2(63, -12)
 script = ExtResource("1_1qy1k")
 
 [node name="Label" type="Label" parent="." unique_id=888000824]

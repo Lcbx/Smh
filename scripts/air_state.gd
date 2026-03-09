@@ -1,16 +1,16 @@
 extends Node2D
 
 @export var SPEED := 350.0
-@export var MAX_FALL_SPEED := 500.0
-@export var ACCELERATION := 1000.0
+@export var ACCELERATION := 800.0
 
-@export var JUMP_HEIGHT := 180
-@export var JUMP_RISING_TIME := 0.7
-@export var JUMP_FALL_TIME := 0.5
+@export var JUMP_HEIGHT := 230
+@export var JUMP_RISING_TIME := 0.8
+@export var JUMP_FALL_TIME := 0.55
 
 var JUMP_IMPULSE : float
 var RISING_GRAVITY : float
 var FALL_GRAVITY : float
+var MAX_FALL_SPEED : float
 
 const AIRBORNE : StringName = "airborne"
 
@@ -22,6 +22,7 @@ func _enter_tree() -> void:
 	RISING_GRAVITY = (2*JUMP_HEIGHT)/pow(JUMP_RISING_TIME,2)
 	FALL_GRAVITY = (2*JUMP_HEIGHT)/pow(JUMP_FALL_TIME,2)
 	JUMP_IMPULSE = calculate_jump_impulse(JUMP_HEIGHT) #RISING_GRAVITY * JUMP_RISING_TIME
+	MAX_FALL_SPEED = FALL_GRAVITY * JUMP_FALL_TIME
 
 func calculate_jump_impulse(jump_height:float) ->float:
 	return sqrt( 2. * RISING_GRAVITY * jump_height )
@@ -37,6 +38,9 @@ func apply(delta: float) -> void:
 	if chtr.check_state(delta): return
 	#print("air")
 	apply_animation(chtr.velocity)
+	
+	#if chtr.attack_requested:
+	#	chtr.velocity = Vector2.RIGHT.rotated(deg_to_rad(-45)) * 800.0
 	
 	if chtr.jumps > 0 and chtr.jump_requested:
 		chtr.jump(JUMP_IMPULSE)
