@@ -1,4 +1,4 @@
-extends Node2D
+extends State
 
 @export var SPEED := 350.0
 @export var ACCELERATION := 800.0
@@ -14,8 +14,6 @@ var MAX_FALL_SPEED : float
 
 const AIRBORNE : StringName = "airborne"
 
-@onready var chtr : Character = get_parent()
-
 #/* calculate secondary constants */
 func _enter_tree() -> void:
 	#jump_air_time = target_jump_max_distance / top_speeds[Character.MovementEnum.run]
@@ -27,7 +25,7 @@ func _enter_tree() -> void:
 func calculate_jump_impulse(jump_height:float) ->float:
 	return sqrt( 2. * RISING_GRAVITY * jump_height )
 
-func enter()->void:
+func enter(...args)->void:
 	pass
 
 func on_coyote_timer_end()->void:
@@ -35,7 +33,7 @@ func on_coyote_timer_end()->void:
 	chtr.jumps -= 1
 
 func apply(delta: float) -> void:
-	if chtr.check_state(delta): return
+	if chtr.check_state(): return
 	#print("air")
 	apply_animation(chtr.velocity)
 	

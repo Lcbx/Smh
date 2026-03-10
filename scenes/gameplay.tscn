@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://dt11wq4wfcrif"]
 
-[ext_resource type="Script" uid="uid://sb84caan4i1k" path="res://scripts/input.gd" id="1_1qy1k"]
+[ext_resource type="Script" uid="uid://sb84caan4i1k" path="res://scripts/gameplay.gd" id="1_1qy1k"]
 [ext_resource type="Script" uid="uid://dhdc4b8yddyej" path="res://addons/rmsmartshape/shapes/shape.gd" id="1_cbffv"]
 [ext_resource type="Script" uid="uid://bwcf4pjgprn0k" path="res://addons/rmsmartshape/shapes/point.gd" id="2_fbudy"]
 [ext_resource type="Script" uid="uid://bo5f7qe27jfje" path="res://addons/rmsmartshape/shapes/point_array.gd" id="3_0m7cd"]
@@ -77,14 +77,16 @@ script = ExtResource("6_3n40r")
 fill_textures = Array[Texture2D]([SubResource("NoiseTexture2D_yaehf")])
 metadata/_custom_type_script = "uid://nc5bfedvnpgm"
 
-[node name="Root" type="Node2D" unique_id=1757507555]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e124b"]
+size = Vector2(1600, 1080)
+
+[node name="gameplay" type="Node2D" unique_id=1757507555]
 script = ExtResource("1_1qy1k")
 
-[node name="Label" type="Label" parent="." unique_id=888000824]
+[node name="test_label" type="Label" parent="." unique_id=888000824]
 offset_right = 40.0
 offset_bottom = 49.0
-text = "TEST
-"
+text = "Test"
 
 [node name="Stage" type="StaticBody2D" parent="." unique_id=1444414146]
 position = Vector2(2, -23)
@@ -104,3 +106,12 @@ polygon = PackedVector2Array(325.67175, 722.4176, 1275.1536, 722.4178, 1281.01, 
 
 [node name="Character" parent="." unique_id=610269851 instance=ExtResource("8_0m7cd")]
 position = Vector2(595, 615)
+
+[node name="StageArea" type="Area2D" parent="." unique_id=1953250869]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StageArea" unique_id=1941794507]
+position = Vector2(800, 540)
+shape = SubResource("RectangleShape2D_e124b")
+
+[node name="respawnPoint" type="Node2D" parent="." unique_id=743436880]
+position = Vector2(745.60803, 409.32135)

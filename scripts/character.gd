@@ -41,8 +41,8 @@ static func const_lerp(a, b, amount:float):
 func is_grounded() -> bool:
 	return ground_check.is_colliding()
 
-func ground_distance() -> float:
-	return (ground_check.global_position + ground_check.target_position - ground_check.get_collision_point()).y
+func ground_distance() -> Vector2:
+	return (ground_check.global_position + ground_check.target_position - ground_check.get_collision_point())
 
 func apply_movement(speed : Vector2, half_acceleration : Vector2, max_horizontal_speed:float) -> void:
 	# half acceleration before + after movement makes for a better integration of the force
@@ -60,26 +60,26 @@ func apply_movement(speed : Vector2, half_acceleration : Vector2, max_horizontal
 	move_and_slide()
 	velocity += half_acceleration
 
-func animate(name:StringName, strength:float=1.0)->void:
+func animate(anim_name:StringName, strength:float=1.0)->void:
 	var speed = max(0.4, strength)
-	var blend = lerp(0.0, 1.0, strength)
-	animation_player.play(name, blend, speed)
-	#print("play", name, blend, speed)
+	var blend = clampf(strength, 0.0, 1.0)
+	#if anim_name != animation_player.current_animation:
+	#	print(self.name, " play ", anim_name, "/", blend, "/", speed)
+	animation_player.play(anim_name, blend, speed)
 
-func enter(state, delta:float = 0.0)->void:
+func enter(state : State, ...args)->void:
 	self.state = state
-	state.enter()
-	if delta != 0.0:
-		state.apply(delta)
+	state.enter.callv(args)
+	if Engine.is_in_physics_frame():
+		state.apply(1.0/float(Engine.physics_ticks_per_second))
 
 # might be made obsolete by command buffer implementation
-func check_state(delta:float)->bool:
+func check_state()->bool:
 	var grounded = is_grounded()
 	var _state := GROUND_STATE if grounded else AIR_STATE
-	var different:bool= state != _state
-	if different: enter(_state, delta)
+	var different:bool = state != _state
+	if different: enter(_state)
 	return different
 
 func jump(strength:float)->void:
-	velocity.y = -strength
-	enter(JUMP_STATE)
+	enter(JUMP_STATE, strength)
