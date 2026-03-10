@@ -6,6 +6,7 @@ extends State
 @export var ACCELERATION := 500.0
 const ON_GROUND_MARGIN := 5.0
 const FRICTION := 1000.0
+const MANTLING_SLERP := 15.0
 
 const IDLE : StringName = "idle"
 const WALK : StringName = "walk"
@@ -41,14 +42,16 @@ func apply(delta: float) -> void:
 		chtr.jump(JUMP_IMPULSE)
 		return
 	
-	var dist = chtr.ground_distance()
+	var dist : Vector2 = chtr.ground_distance()
 	if absf(dist.y) > ON_GROUND_MARGIN:
-		chtr.move_and_collide(-dist)
+		# NOTE: target_pos is more or less constant throughout frames
+		var target_pos := chtr.position - dist
+		#print("target_pos", target_pos)
+		var traveled : Vector2 = chtr.const_lerp( chtr.position, target_pos, MANTLING_SLERP * delta) - chtr.position
+		chtr.move_and_collide(traveled)
 	
 	velocity.y = 0.0
 	chtr.apply_movement(velocity, acceleration, SPEED)
-	
-	
 
 func apply_animation(velocity:Vector2)->void:
 	
