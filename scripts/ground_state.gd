@@ -1,11 +1,11 @@
 extends State
 
-@export var SPEED := 450.0
+@export var SPEED := 550.0
 @export var MIN_SPEED := 200.0
 @export var JUMP_HEIGHT := 330
-@export var ACCELERATION := 500.0
+@export var ACCELERATION_LERP := 5.0
+
 const ON_GROUND_MARGIN := 5.0
-const FRICTION := 1000.0
 const MANTLING_SLERP := 15.0
 
 const IDLE : StringName = "idle"
@@ -16,6 +16,7 @@ const WALK : StringName = "walk"
 func enter(...args) -> void:
 	chtr.COYOTE_TIMER.stop()
 	chtr.jumps = chtr.MAX_JUMPS
+	chtr.unused_wall_jump = true
 
 func apply(delta: float) -> void:
 	if chtr.check_state():
@@ -31,12 +32,9 @@ func apply(delta: float) -> void:
 	var direction := chtr.stick_direction
 	#if chtr.jump_requested: direction.y = -1
 	
-	if abs(direction.x) <= 0.1:
-		velocity.x = move_toward(velocity.x, 0.0, FRICTION * delta)
-	else:
-		if velocity.x * direction.x < MIN_SPEED:
-			velocity.x = direction.x * MIN_SPEED 
-		acceleration.x += direction.x * ACCELERATION * delta
+	if velocity.x * direction.x < MIN_SPEED:
+		velocity.x = direction.x * MIN_SPEED
+	acceleration.x = chtr.const_lerp(velocity.x, SPEED * direction.x, ACCELERATION_LERP * delta) - velocity.x
 	
 	if chtr.jump_requested:
 		chtr.jump(JUMP_IMPULSE)

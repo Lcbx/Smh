@@ -25,6 +25,7 @@ func start_moving():
 func end(anim_name:StringName)->void:
 	if anim_name == JUMP:
 		chtr.sprite.position = Vector2.ZERO
+		#chtr.state = chtr.AIR_STATE # bypass enter()
 		chtr.enter(chtr.AIR_STATE)
 
 func apply(delta: float) -> void:

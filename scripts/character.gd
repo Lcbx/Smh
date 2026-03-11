@@ -11,7 +11,10 @@ extends CharacterBody2D
 @onready var COYOTE_TIMER : Timer = %CoyoteTime
 
 @export var MAX_JUMPS := 2
-var jumps : int = MAX_JUMPS
+var unused_wall_jump := true
+var jumps : int = MAX_JUMPS :
+	set(value):
+		jumps = mini(value, MAX_JUMPS)
 
 func _ready() -> void:
 	animation_player.play("idle")
@@ -29,8 +32,6 @@ signal input
 func _physics_process(delta: float) -> void:
 	input.emit() # gather input
 	state.apply(delta)
-
-#NOTE: maybe restore a jump on first collision with the side of the arena
 
 # framerate independent lerp
 # use as a = const_lerp(a, b, speed * dt) each frame
@@ -73,7 +74,7 @@ func enter(state : State, ...args)->void:
 	if Engine.is_in_physics_frame():
 		state.apply(1.0/float(Engine.physics_ticks_per_second))
 
-# might be made obsolete by command buffer implementation
+# TODO: check the command buffer and apply it in there ? 
 func check_state()->bool:
 	var grounded = is_grounded()
 	var _state := GROUND_STATE if grounded else AIR_STATE

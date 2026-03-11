@@ -1,9 +1,9 @@
 extends State
 
-@export var SPEED := 350.0
-@export var ACCELERATION := 800.0
+@export var SPEED := 400.0
+@export var ACCELERATION_LERP := 3.0
 
-@export var JUMP_HEIGHT := 230
+@export var JUMP_HEIGHT := 250
 @export var JUMP_RISING_TIME := 0.8
 @export var JUMP_FALL_TIME := 0.55
 
@@ -48,12 +48,22 @@ func apply(delta: float) -> void:
 
 func apply_movement(delta: float)->void:
 	
-	var acceleration := Vector2.ZERO
+	# restores a jump on the first wall collision of an aerial maneuver
+	if (chtr.unused_wall_jump
+		and chtr.jumps < chtr.MAX_JUMPS
+		and chtr.get_slide_collision_count() > 0
+		and abs(chtr.get_last_slide_collision().get_normal().dot(Vector2.RIGHT)) > 0.5
+	):
+		#print("restoring jump")
+		chtr.unused_wall_jump = false
+		chtr.jumps += 1
+	
 	var velocity := chtr.velocity
+	var acceleration := Vector2.ZERO
 	var direction := chtr.stick_direction
 	#if chtr.jump_requested: direction.y = -1
 	
-	acceleration.x += direction.x * ACCELERATION * delta
+	acceleration.x = chtr.const_lerp(velocity.x, SPEED * direction.x, ACCELERATION_LERP * delta) - velocity.x
 	
 	var floatiness_modifier := 0.1 if sign(direction.y) < 0 else 0.5
 	var gravity := RISING_GRAVITY if velocity.y < 0 else FALL_GRAVITY
