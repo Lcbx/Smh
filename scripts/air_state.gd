@@ -25,7 +25,7 @@ func _enter_tree() -> void:
 func calculate_jump_impulse(jump_height:float) ->float:
 	return sqrt( 2. * RISING_GRAVITY * jump_height )
 
-func enter(...args)->void:
+func enter(..._args)->void:
 	pass
 
 func on_coyote_timer_end()->void:
@@ -63,7 +63,7 @@ func apply_movement(delta: float)->void:
 	var direction := chtr.stick_direction
 	#if chtr.jump_requested: direction.y = -1
 	
-	acceleration.x = chtr.const_lerp(velocity.x, SPEED * direction.x, ACCELERATION_LERP * delta) - velocity.x
+	acceleration.x = Character.const_lerp(velocity.x, SPEED * direction.x, ACCELERATION_LERP * delta) - velocity.x
 	
 	var floatiness_modifier := 0.1 if sign(direction.y) < 0 else 0.5
 	var gravity := RISING_GRAVITY if velocity.y < 0 else FALL_GRAVITY

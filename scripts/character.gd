@@ -84,3 +84,7 @@ func check_state()->bool:
 
 func jump(strength:float)->void:
 	enter(JUMP_STATE, strength)
+
+func teleport(tp_position : Vector2)->void:
+	position = tp_position
+	reset_physics_interpolation()

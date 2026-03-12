@@ -32,4 +32,4 @@ func _on_stage_exit(body: Node2D) -> void:
 		# TODO : clear all statuses, add some invincibility frames
 		player.velocity = Vector2.ZERO
 		player.enter(player.GROUND_STATE)
-		player.position = respawn_point.position
+		player.teleport(respawn_point.position)

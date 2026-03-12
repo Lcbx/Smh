@@ -13,7 +13,7 @@ const WALK : StringName = "walk"
 
 @onready var JUMP_IMPULSE : float = %AirState.calculate_jump_impulse(JUMP_HEIGHT)
 
-func enter(...args) -> void:
+func enter(..._args) -> void:
 	chtr.COYOTE_TIMER.stop()
 	chtr.jumps = chtr.MAX_JUMPS
 	chtr.unused_wall_jump = true
@@ -34,7 +34,7 @@ func apply(delta: float) -> void:
 	
 	if velocity.x * direction.x < MIN_SPEED:
 		velocity.x = direction.x * MIN_SPEED
-	acceleration.x = chtr.const_lerp(velocity.x, SPEED * direction.x, ACCELERATION_LERP * delta) - velocity.x
+	acceleration.x = Character.const_lerp(velocity.x, SPEED * direction.x, ACCELERATION_LERP * delta) - velocity.x
 	
 	if chtr.jump_requested:
 		chtr.jump(JUMP_IMPULSE)
@@ -45,7 +45,7 @@ func apply(delta: float) -> void:
 		# NOTE: target_pos is more or less constant throughout frames
 		var target_pos := chtr.position - dist
 		#print("target_pos", target_pos)
-		var traveled : Vector2 = chtr.const_lerp( chtr.position, target_pos, MANTLING_SLERP * delta) - chtr.position
+		var traveled : Vector2 = Character.const_lerp( chtr.position, target_pos, MANTLING_SLERP * delta) - chtr.position
 		chtr.move_and_collide(traveled)
 	
 	velocity.y = 0.0
