@@ -5,10 +5,12 @@ extends CharacterBody2D
 @onready var ground_check: RayCast2D = %ground_check
 @onready var sprite: Node2D = %sprite
 @onready var collision: CollisionPolygon2D = $CollisionPolygon2D
+
 @onready var GROUND_STATE : Node2D = %GroundState
 @onready var AIR_STATE : Node2D = %AirState
 @onready var JUMP_STATE : Node2D = %JumpState
 @onready var COYOTE_TIMER : Timer = %CoyoteTime
+@onready var PUNCH_STATE : Node2D = %PunchState
 
 @export var MAX_JUMPS := 2
 var unused_wall_jump := true
@@ -61,12 +63,12 @@ func apply_movement(speed : Vector2, half_acceleration : Vector2, max_horizontal
 	move_and_slide()
 	velocity += half_acceleration
 
-func animate(anim_name:StringName, strength:float=1.0)->void:
+func animate(anim_name:StringName, strength:float=1.0, blend_time:float = 0.1)->void:
 	var speed = max(0.4, strength)
-	var blend = clampf(strength, 0.0, 1.0)
 	#if anim_name != animation_player.current_animation:
-	#	print(self.name, " play ", anim_name, "/", blend, "/", speed)
-	animation_player.play(anim_name, blend, speed)
+	#	print(self.name, " play ", anim_name, "/", blend_time, "/", speed)
+	animation_player.play(anim_name, blend_time, speed)
+	animation_player.advance(0)
 
 func enter(state : State, ...args)->void:
 	self.state = state
@@ -74,7 +76,7 @@ func enter(state : State, ...args)->void:
 	if Engine.is_in_physics_frame():
 		state.apply(1.0/float(Engine.physics_ticks_per_second))
 
-# TODO: check the command buffer and apply it in there ? 
+# TODO: check the command buffer and apply it in there ?
 func check_state()->bool:
 	var grounded = is_grounded()
 	var _state := GROUND_STATE if grounded else AIR_STATE

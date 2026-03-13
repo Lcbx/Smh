@@ -23,10 +23,20 @@ func apply(delta: float) -> void:
 		chtr.COYOTE_TIMER.start()
 		return
 	
-	#print("ground")
+	if chtr.jump_requested:
+		chtr.jump(JUMP_IMPULSE)
+		return
+		
+	if chtr.attack_requested:
+		chtr.enter(chtr.PUNCH_STATE)
+		return
 	
+	#print("ground")
+	apply_movement(delta)
 	apply_animation(chtr.velocity)
 	
+
+func apply_movement(delta:float)->void:
 	var acceleration := Vector2.ZERO
 	var velocity := chtr.velocity
 	var direction := chtr.stick_direction
@@ -35,10 +45,6 @@ func apply(delta: float) -> void:
 	if velocity.x * direction.x < MIN_SPEED:
 		velocity.x = direction.x * MIN_SPEED
 	acceleration.x = Character.const_lerp(velocity.x, SPEED * direction.x, ACCELERATION_LERP * delta) - velocity.x
-	
-	if chtr.jump_requested:
-		chtr.jump(JUMP_IMPULSE)
-		return
 	
 	var dist : Vector2 = chtr.ground_distance()
 	if absf(dist.y) > ON_GROUND_MARGIN:
@@ -50,17 +56,18 @@ func apply(delta: float) -> void:
 	
 	velocity.y = 0.0
 	chtr.apply_movement(velocity, acceleration, SPEED)
+	
 
 func apply_animation(velocity:Vector2)->void:
 	
-	var flip := float(sign(velocity.x)) if velocity.x != 0.0 else chtr.sprite.scale.x
+	var flip : float = sign(velocity.x) if velocity.x != 0.0 else chtr.sprite.scale.x
 	chtr.sprite.scale.x = flip
 	
 	# NOTE: flipping collision using scale might be bad for physics
 	chtr.collision.scale.x = flip
 	
 	var walk_blend := absf(velocity.x) / SPEED
-	if walk_blend < 0.1:
+	if walk_blend < 0.2:
 		chtr.animate(IDLE, 1.0 - walk_blend)
 	else:
 		chtr.animate(WALK, walk_blend)

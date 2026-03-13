@@ -15,18 +15,14 @@ func enter(...args) -> void:
 	move = false
 	chtr.COYOTE_TIMER.stop()
 	chtr.animate(JUMP,anim_speed)
-	chtr.animation_player.animation_finished.connect(self.end,ConnectFlags.CONNECT_ONE_SHOT)
 
 # not a fan of this compromise
 func start_moving():
 	chtr.velocity.y = -strength
 	move=true
 
-func end(anim_name:StringName)->void:
-	if anim_name == JUMP:
-		chtr.sprite.position = Vector2.ZERO
-		#chtr.state = chtr.AIR_STATE # bypass enter()
-		chtr.enter(chtr.AIR_STATE)
+func end()->void:
+	chtr.check_state()
 
 func apply(delta: float) -> void:
 	if move:

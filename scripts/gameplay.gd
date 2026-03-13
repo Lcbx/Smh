@@ -17,6 +17,11 @@ func _input(event: InputEvent) -> void:
 	player.jump_requested = Input.is_action_just_pressed("ui_accept")
 	player.attack_requested = Input.is_action_just_pressed("attack")
 	player.special_requested = Input.is_action_just_pressed("special")
+	
+	#print("jump_requested ", player.jump_requested)
+	#print("attack_requested ", player.attack_requested)
+	#print("special_requested ", player.special_requested)
+	
 	#print("event ", event)
 	#print("position ", player.position)
 	#print("velocity ", player.velocity)
