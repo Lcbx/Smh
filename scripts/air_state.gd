@@ -3,9 +3,9 @@ extends State
 @export var SPEED := 400.0
 @export var ACCELERATION_LERP := 3.0
 
-@export var JUMP_HEIGHT := 250
-@export var JUMP_RISING_TIME := 0.8
-@export var JUMP_FALL_TIME := 0.55
+@export var JUMP_HEIGHT := 125
+@export var JUMP_RISING_TIME := 0.4
+@export var JUMP_FALL_TIME := 0.3
 
 var JUMP_IMPULSE : float
 var RISING_GRAVITY : float
@@ -38,7 +38,7 @@ func apply(delta: float) -> void:
 	apply_animation(chtr.velocity)
 	
 	#if chtr.attack_requested:
-	#	chtr.velocity = Vector2.RIGHT.rotated(deg_to_rad(-45)) * 800.0
+	#	chtr.velocity = Vector2.RIGHT.rotated(deg_to_rad(45)) * 1600.0
 	
 	if chtr.jumps > 0 and chtr.jump_requested:
 		chtr.jump(JUMP_IMPULSE)
@@ -63,7 +63,7 @@ func apply_movement(delta: float)->void:
 	var direction := chtr.stick_direction
 	#if chtr.jump_requested: direction.y = -1
 	
-	acceleration.x = Character.const_lerp(velocity.x, SPEED * direction.x, ACCELERATION_LERP * delta) - velocity.x
+	acceleration.x = Character.caculate_lerp_offset(velocity.x, SPEED * direction.x, ACCELERATION_LERP * delta)
 	
 	var floatiness_modifier := 0.1 if sign(direction.y) < 0 else 0.5
 	var gravity := RISING_GRAVITY if velocity.y < 0 else FALL_GRAVITY
@@ -73,5 +73,6 @@ func apply_movement(delta: float)->void:
 	chtr.apply_movement(velocity, acceleration, SPEED)
 
 func apply_animation(velocity:Vector2)->void:
-	chtr.sprite.scale.x = sign(velocity.x) if velocity.x != 0.0 else chtr.sprite.scale.x
+	if velocity.x != 0.0:
+		chtr.flipped = velocity.x < 0.0
 	chtr.animate(AIRBORNE)

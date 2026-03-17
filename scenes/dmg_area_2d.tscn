@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://b1pmu24ntq2or"]
+
+[ext_resource type="Script" uid="uid://cua82xu2yvdsw" path="res://scripts/dmg_area.gd" id="1_ghcol"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_irmqu"]
+radius = 17.0
+height = 44.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7eonc"]
+radius = 20.0
+height = 50.0
+
+[node name="dmgArea2D" type="Area2D" unique_id=2075851471]
+monitoring = false
+monitorable = false
+script = ExtResource("1_ghcol")
+
+[node name="start" type="CollisionShape2D" parent="." unique_id=749747420]
+position = Vector2(-37, 9)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_irmqu")
+disabled = true
+
+[node name="middle" type="CollisionShape2D" parent="." unique_id=2088734308]
+position = Vector2(-8, 4)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_7eonc")
+disabled = true
+
+[node name="end" type="CollisionShape2D" parent="." unique_id=577852790]
+position = Vector2(28, -7)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_7eonc")
+disabled = true

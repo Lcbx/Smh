@@ -1,88 +1,19 @@
 [gd_scene format=3 uid="uid://d078tyktno1fs"]
 
 [ext_resource type="Script" uid="uid://x362jrn3xugr" path="res://scripts/character.gd" id="1_wdpcj"]
-[ext_resource type="Script" uid="uid://dhdc4b8yddyej" path="res://addons/rmsmartshape/shapes/shape.gd" id="2_qi5as"]
-[ext_resource type="Script" uid="uid://bwcf4pjgprn0k" path="res://addons/rmsmartshape/shapes/point.gd" id="3_jb3kq"]
-[ext_resource type="Script" uid="uid://bo5f7qe27jfje" path="res://addons/rmsmartshape/shapes/point_array.gd" id="4_c1b4b"]
-[ext_resource type="Script" uid="uid://0lhxan4cqrc1" path="res://addons/rmsmartshape/materials/edge_material_metadata.gd" id="5_7tnxx"]
-[ext_resource type="Script" uid="uid://nc5bfedvnpgm" path="res://addons/rmsmartshape/materials/shape_material.gd" id="6_bwfjh"]
+[ext_resource type="PackedScene" uid="uid://b1pmu24ntq2or" path="res://scenes/dmg_area_2d.tscn" id="6_2cgup"]
 [ext_resource type="Texture2D" uid="uid://bbp0ygwq1u3i3" path="res://assets/character_cutout_final.png" id="7_x1sy7"]
 [ext_resource type="Script" uid="uid://bser4q5e3j6kl" path="res://scripts/ground_state.gd" id="8_sm1rv"]
 [ext_resource type="Script" uid="uid://pdkor25hevti" path="res://scripts/air_state.gd" id="9_qi5as"]
 [ext_resource type="Script" uid="uid://b6es8sloopvsk" path="res://scripts/jump_state.gd" id="10_2hyy3"]
 [ext_resource type="Script" uid="uid://c31v5g0erup81" path="res://scripts/punch_state.gd" id="11_irmqu"]
 
-[sub_resource type="Resource" id="Resource_eod45"]
-script = ExtResource("3_jb3kq")
-position = Vector2(-5.0510406, -51.13327)
-
-[sub_resource type="Resource" id="Resource_fbudy"]
-script = ExtResource("3_jb3kq")
-position = Vector2(-23.4729, -28.527779)
-
-[sub_resource type="Resource" id="Resource_2ihbs"]
-script = ExtResource("3_jb3kq")
-position = Vector2(0.23703003, 38.669403)
-texture_idx = 1
-
-[sub_resource type="Resource" id="Resource_1qy1k"]
-script = ExtResource("3_jb3kq")
-position = Vector2(30.807266, -23.446213)
-
-[sub_resource type="Resource" id="Resource_3n40r"]
-script = ExtResource("3_jb3kq")
-position = Vector2(-5.0510406, -51.13327)
-
-[sub_resource type="Resource" id="Resource_eglai"]
-script = ExtResource("3_jb3kq")
-position = Vector2(-8.2343445, -35.260185)
-texture_idx = -3
-
-[sub_resource type="Resource" id="Resource_m1ld8"]
-script = ExtResource("3_jb3kq")
-position = Vector2(11.00386, -52.301384)
-
-[sub_resource type="Resource" id="Resource_7y1a3"]
-script = ExtResource("3_jb3kq")
-position = Vector2(17.616806, -33.936844)
-
-[sub_resource type="Resource" id="Resource_2hyy3"]
-script = ExtResource("3_jb3kq")
-position = Vector2(-24.080559, -1.1776505)
-
-[sub_resource type="Resource" id="Resource_irmqu"]
-script = ExtResource("3_jb3kq")
-position = Vector2(20.038803, 10.495178)
-
-[sub_resource type="Resource" id="Resource_nwk8b"]
-script = ExtResource("4_c1b4b")
-_points = {
-0: SubResource("Resource_eod45"),
-1: SubResource("Resource_fbudy"),
-3: SubResource("Resource_2ihbs"),
-6: SubResource("Resource_1qy1k"),
-7: SubResource("Resource_3n40r"),
-14: SubResource("Resource_eglai"),
-15: SubResource("Resource_m1ld8"),
-17: SubResource("Resource_7y1a3"),
-22: SubResource("Resource_2hyy3"),
-23: SubResource("Resource_irmqu")
-}
-_point_order = PackedInt32Array(7, 15, 17, 6, 23, 3, 22, 1, 14, 0)
-_constraints = {
-Vector2i(7, 0): 15
-}
-_next_key = 24
-
-[sub_resource type="Resource" id="Resource_x2ust"]
-script = ExtResource("6_bwfjh")
-
 [sub_resource type="Animation" id="Animation_0m7cd"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("sprite/torso/head:position")
+tracks/0/path = NodePath("CollisionPolygon2D/sprite/torso/head:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -94,7 +25,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("sprite/torso/head:rotation")
+tracks/1/path = NodePath("CollisionPolygon2D/sprite/torso/head:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -106,7 +37,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("sprite/torso/upper_arm_L:position")
+tracks/2/path = NodePath("CollisionPolygon2D/sprite/torso/upper_arm_L:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -118,7 +49,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("sprite/torso/upper_arm_L:rotation")
+tracks/3/path = NodePath("CollisionPolygon2D/sprite/torso/upper_arm_L:rotation")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -130,7 +61,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("sprite/torso/upper_arm_L/lower_arm_L:position")
+tracks/4/path = NodePath("CollisionPolygon2D/sprite/torso/upper_arm_L/lower_arm_L:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -142,7 +73,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("sprite/torso/upper_arm_L/lower_arm_L:rotation")
+tracks/5/path = NodePath("CollisionPolygon2D/sprite/torso/upper_arm_L/lower_arm_L:rotation")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -154,7 +85,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("sprite/torso/upper_arm_R:position")
+tracks/6/path = NodePath("CollisionPolygon2D/sprite/torso/upper_arm_R:position")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -166,7 +97,7 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("sprite/torso/upper_arm_R:rotation")
+tracks/7/path = NodePath("CollisionPolygon2D/sprite/torso/upper_arm_R:rotation")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -178,7 +109,7 @@ tracks/7/keys = {
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("sprite/torso/upper_arm_R/lower_arm_R:position")
+tracks/8/path = NodePath("CollisionPolygon2D/sprite/torso/upper_arm_R/lower_arm_R:position")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
@@ -190,7 +121,7 @@ tracks/8/keys = {
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("sprite/torso/upper_arm_R/lower_arm_R:rotation")
+tracks/9/path = NodePath("CollisionPolygon2D/sprite/torso/upper_arm_R/lower_arm_R:rotation")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
@@ -202,7 +133,7 @@ tracks/9/keys = {
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("sprite/torso/upper_leg_R:position")
+tracks/10/path = NodePath("CollisionPolygon2D/sprite/torso/upper_leg_R:position")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
@@ -214,7 +145,7 @@ tracks/10/keys = {
 tracks/11/type = "value"
 tracks/11/imported = false
 tracks/11/enabled = true
-tracks/11/path = NodePath("sprite/torso/upper_leg_R:rotation")
+tracks/11/path = NodePath("CollisionPolygon2D/sprite/torso/upper_leg_R:rotation")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/keys = {
@@ -226,7 +157,7 @@ tracks/11/keys = {
 tracks/12/type = "value"
 tracks/12/imported = false
 tracks/12/enabled = true
-tracks/12/path = NodePath("sprite/torso/upper_leg_R/lower_leg_R:position")
+tracks/12/path = NodePath("CollisionPolygon2D/sprite/torso/upper_leg_R/lower_leg_R:position")
 tracks/12/interp = 1
 tracks/12/loop_wrap = true
 tracks/12/keys = {
@@ -238,7 +169,7 @@ tracks/12/keys = {
 tracks/13/type = "value"
 tracks/13/imported = false
 tracks/13/enabled = true
-tracks/13/path = NodePath("sprite/torso/upper_leg_R/lower_leg_R:rotation")
+tracks/13/path = NodePath("CollisionPolygon2D/sprite/torso/upper_leg_R/lower_leg_R:rotation")
 tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = {
@@ -250,7 +181,7 @@ tracks/13/keys = {
 tracks/14/type = "value"
 tracks/14/imported = false
 tracks/14/enabled = true
-tracks/14/path = NodePath("sprite/torso/upper_leg_L:position")
+tracks/14/path = NodePath("CollisionPolygon2D/sprite/torso/upper_leg_L:position")
 tracks/14/interp = 1
 tracks/14/loop_wrap = true
 tracks/14/keys = {
@@ -262,7 +193,7 @@ tracks/14/keys = {
 tracks/15/type = "value"
 tracks/15/imported = false
 tracks/15/enabled = true
-tracks/15/path = NodePath("sprite/torso/upper_leg_L:rotation")
+tracks/15/path = NodePath("CollisionPolygon2D/sprite/torso/upper_leg_L:rotation")
 tracks/15/interp = 1
 tracks/15/loop_wrap = true
 tracks/15/keys = {
@@ -274,7 +205,7 @@ tracks/15/keys = {
 tracks/16/type = "value"
 tracks/16/imported = false
 tracks/16/enabled = true
-tracks/16/path = NodePath("sprite/torso/upper_leg_L/lower_leg_L:position")
+tracks/16/path = NodePath("CollisionPolygon2D/sprite/torso/upper_leg_L/lower_leg_L:position")
 tracks/16/interp = 1
 tracks/16/loop_wrap = true
 tracks/16/keys = {
@@ -286,7 +217,7 @@ tracks/16/keys = {
 tracks/17/type = "value"
 tracks/17/imported = false
 tracks/17/enabled = true
-tracks/17/path = NodePath("sprite/torso/upper_leg_L/lower_leg_L:rotation")
+tracks/17/path = NodePath("CollisionPolygon2D/sprite/torso/upper_leg_L/lower_leg_L:rotation")
 tracks/17/interp = 1
 tracks/17/loop_wrap = true
 tracks/17/keys = {
@@ -298,7 +229,7 @@ tracks/17/keys = {
 tracks/18/type = "value"
 tracks/18/imported = false
 tracks/18/enabled = true
-tracks/18/path = NodePath("sprite/torso:rotation")
+tracks/18/path = NodePath("CollisionPolygon2D/sprite/torso:rotation")
 tracks/18/interp = 1
 tracks/18/loop_wrap = true
 tracks/18/keys = {
@@ -310,7 +241,7 @@ tracks/18/keys = {
 tracks/19/type = "value"
 tracks/19/imported = false
 tracks/19/enabled = true
-tracks/19/path = NodePath("sprite/torso:region_rect")
+tracks/19/path = NodePath("CollisionPolygon2D/sprite/torso:region_rect")
 tracks/19/interp = 1
 tracks/19/loop_wrap = true
 tracks/19/keys = {
@@ -322,7 +253,7 @@ tracks/19/keys = {
 tracks/20/type = "value"
 tracks/20/imported = false
 tracks/20/enabled = true
-tracks/20/path = NodePath("sprite/torso/upper_arm_R/lower_arm_R:scale")
+tracks/20/path = NodePath("CollisionPolygon2D/sprite/torso/upper_arm_R/lower_arm_R:scale")
 tracks/20/interp = 1
 tracks/20/loop_wrap = true
 tracks/20/keys = {
@@ -334,7 +265,7 @@ tracks/20/keys = {
 tracks/21/type = "value"
 tracks/21/imported = false
 tracks/21/enabled = true
-tracks/21/path = NodePath("sprite/torso/upper_arm_L/lower_arm_L:scale")
+tracks/21/path = NodePath("CollisionPolygon2D/sprite/torso/upper_arm_L/lower_arm_L:scale")
 tracks/21/interp = 1
 tracks/21/loop_wrap = true
 tracks/21/keys = {
@@ -346,7 +277,7 @@ tracks/21/keys = {
 tracks/22/type = "value"
 tracks/22/imported = false
 tracks/22/enabled = true
-tracks/22/path = NodePath("sprite/torso/upper_arm_R:scale")
+tracks/22/path = NodePath("CollisionPolygon2D/sprite/torso/upper_arm_R:scale")
 tracks/22/interp = 1
 tracks/22/loop_wrap = true
 tracks/22/keys = {
@@ -358,7 +289,7 @@ tracks/22/keys = {
 tracks/23/type = "value"
 tracks/23/imported = false
 tracks/23/enabled = true
-tracks/23/path = NodePath("sprite/torso:position")
+tracks/23/path = NodePath("CollisionPolygon2D/sprite/torso:position")
 tracks/23/interp = 1
 tracks/23/loop_wrap = true
 tracks/23/keys = {
@@ -370,7 +301,7 @@ tracks/23/keys = {
 tracks/24/type = "value"
 tracks/24/imported = false
 tracks/24/enabled = true
-tracks/24/path = NodePath("sprite/torso/upper_arm_L:scale")
+tracks/24/path = NodePath("CollisionPolygon2D/sprite/torso/upper_arm_L:scale")
 tracks/24/interp = 1
 tracks/24/loop_wrap = true
 tracks/24/keys = {
@@ -378,6 +309,54 @@ tracks/24/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(0.9, 0.9)]
+}
+tracks/25/type = "value"
+tracks/25/imported = false
+tracks/25/enabled = true
+tracks/25/path = NodePath("CollisionPolygon2D/PunchState/dmgArea2D/start:disabled")
+tracks/25/interp = 1
+tracks/25/loop_wrap = true
+tracks/25/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/26/type = "value"
+tracks/26/imported = false
+tracks/26/enabled = true
+tracks/26/path = NodePath("CollisionPolygon2D/PunchState/dmgArea2D/middle:disabled")
+tracks/26/interp = 1
+tracks/26/loop_wrap = true
+tracks/26/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/27/type = "value"
+tracks/27/imported = false
+tracks/27/enabled = true
+tracks/27/path = NodePath("CollisionPolygon2D/PunchState/dmgArea2D/end:disabled")
+tracks/27/interp = 1
+tracks/27/loop_wrap = true
+tracks/27/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/28/type = "value"
+tracks/28/imported = false
+tracks/28/enabled = true
+tracks/28/path = NodePath("CollisionPolygon2D/PunchState/dmgArea2D:monitoring")
+tracks/28/interp = 1
+tracks/28/loop_wrap = true
+tracks/28/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_2hyy3"]
@@ -387,7 +366,7 @@ step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("sprite/torso/head:position")
+tracks/0/path = NodePath("CollisionPolygon2D/sprite/torso/head:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -399,7 +378,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("sprite/torso/head:rotation")
+tracks/1/path = NodePath("CollisionPolygon2D/sprite/torso/head:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -411,7 +390,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("sprite/torso/upper_arm_L:position")
+tracks/2/path = NodePath("CollisionPolygon2D/sprite/torso/upper_arm_L:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -423,7 +402,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("sprite/torso/upper_arm_L:rotation")
+tracks/3/path = NodePath("CollisionPolygon2D/sprite/torso/upper_arm_L:rotation")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -435,7 +414,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("sprite/torso/upper_arm_L/lower_arm_L:position")
+tracks/4/path = NodePath("CollisionPolygon2D/sprite/torso/upper_arm_L/lower_arm_L:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -447,7 +426,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("sprite/torso/upper_arm_L/lower_arm_L:rotation")
+tracks/5/path = NodePath("CollisionPolygon2D/sprite/torso/upper_arm_L/lower_arm_L:rotation")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -459,7 +438,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("sprite/torso/upper_arm_R:position")
+tracks/6/path = NodePath("CollisionPolygon2D/sprite/torso/upper_arm_R:position")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -471,7 +450,7 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("sprite/torso/upper_arm_R:rotation")
+tracks/7/path = NodePath("CollisionPolygon2D/sprite/torso/upper_arm_R:rotation")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -483,7 +462,7 @@ tracks/7/keys = {
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("sprite/torso/upper_arm_R/lower_arm_R:position")
+tracks/8/path = NodePath("CollisionPolygon2D/sprite/torso/upper_arm_R/lower_arm_R:position")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
@@ -495,7 +474,7 @@ tracks/8/keys = {
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("sprite/torso/upper_arm_R/lower_arm_R:rotation")
+tracks/9/path = NodePath("CollisionPolygon2D/sprite/torso/upper_arm_R/lower_arm_R:rotation")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
@@ -507,7 +486,7 @@ tracks/9/keys = {
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("sprite/torso/upper_leg_R:position")
+tracks/10/path = NodePath("CollisionPolygon2D/sprite/torso/upper_leg_R:position")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
@@ -519,7 +498,7 @@ tracks/10/keys = {
 tracks/11/type = "value"
 tracks/11/imported = false
 tracks/11/enabled = true
-tracks/11/path = NodePath("sprite/torso/upper_leg_R:rotation")
+tracks/11/path = NodePath("CollisionPolygon2D/sprite/torso/upper_leg_R:rotation")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/keys = {
@@ -531,7 +510,7 @@ tracks/11/keys = {
 tracks/12/type = "value"
 tracks/12/imported = false
 tracks/12/enabled = true
-tracks/12/path = NodePath("sprite/torso/upper_leg_R/lower_leg_R:position")
+tracks/12/path = NodePath("CollisionPolygon2D/sprite/torso/upper_leg_R/lower_leg_R:position")
 tracks/12/interp = 1
 tracks/12/loop_wrap = true
 tracks/12/keys = {
@@ -543,7 +522,7 @@ tracks/12/keys = {
 tracks/13/type = "value"
 tracks/13/imported = false
 tracks/13/enabled = true
-tracks/13/path = NodePath("sprite/torso/upper_leg_R/lower_leg_R:rotation")
+tracks/13/path = NodePath("CollisionPolygon2D/sprite/torso/upper_leg_R/lower_leg_R:rotation")
 tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = {
@@ -555,7 +534,7 @@ tracks/13/keys = {
 tracks/14/type = "value"
 tracks/14/imported = false
 tracks/14/enabled = true
-tracks/14/path = NodePath("sprite/torso/upper_leg_L:position")
+tracks/14/path = NodePath("CollisionPolygon2D/sprite/torso/upper_leg_L:position")
 tracks/14/interp = 1
 tracks/14/loop_wrap = true
 tracks/14/keys = {
@@ -567,7 +546,7 @@ tracks/14/keys = {
 tracks/15/type = "value"
 tracks/15/imported = false
 tracks/15/enabled = true
-tracks/15/path = NodePath("sprite/torso/upper_leg_L:rotation")
+tracks/15/path = NodePath("CollisionPolygon2D/sprite/torso/upper_leg_L:rotation")
 tracks/15/interp = 1
 tracks/15/loop_wrap = true
 tracks/15/keys = {
@@ -579,7 +558,7 @@ tracks/15/keys = {
 tracks/16/type = "value"
 tracks/16/imported = false
 tracks/16/enabled = true
-tracks/16/path = NodePath("sprite/torso/upper_leg_L/lower_leg_L:position")
+tracks/16/path = NodePath("CollisionPolygon2D/sprite/torso/upper_leg_L/lower_leg_L:position")
 tracks/16/interp = 1
 tracks/16/loop_wrap = true
 tracks/16/keys = {
@@ -591,7 +570,7 @@ tracks/16/keys = {
 tracks/17/type = "value"
 tracks/17/imported = false
 tracks/17/enabled = true
-tracks/17/path = NodePath("sprite/torso/upper_leg_L/lower_leg_L:rotation")
+tracks/17/path = NodePath("CollisionPolygon2D/sprite/torso/upper_leg_L/lower_leg_L:rotation")
 tracks/17/interp = 1
 tracks/17/loop_wrap = true
 tracks/17/keys = {
@@ -603,7 +582,7 @@ tracks/17/keys = {
 tracks/18/type = "value"
 tracks/18/imported = false
 tracks/18/enabled = true
-tracks/18/path = NodePath("sprite/torso:rotation")
+tracks/18/path = NodePath("CollisionPolygon2D/sprite/torso:rotation")
 tracks/18/interp = 1
 tracks/18/loop_wrap = true
 tracks/18/keys = {
@@ -615,7 +594,7 @@ tracks/18/keys = {
 tracks/19/type = "value"
 tracks/19/imported = false
 tracks/19/enabled = true
-tracks/19/path = NodePath("sprite/torso:region_rect")
+tracks/19/path = NodePath("CollisionPolygon2D/sprite/torso:region_rect")
 tracks/19/interp = 1
 tracks/19/loop_wrap = true
 tracks/19/keys = {
@@ -627,7 +606,7 @@ tracks/19/keys = {
 tracks/20/type = "value"
 tracks/20/imported = false
 tracks/20/enabled = true
-tracks/20/path = NodePath("sprite/torso/upper_arm_R/lower_arm_R:scale")
+tracks/20/path = NodePath("CollisionPolygon2D/sprite/torso/upper_arm_R/lower_arm_R:scale")
 tracks/20/interp = 1
 tracks/20/loop_wrap = true
 tracks/20/keys = {
@@ -639,7 +618,7 @@ tracks/20/keys = {
 tracks/21/type = "value"
 tracks/21/imported = false
 tracks/21/enabled = true
-tracks/21/path = NodePath("sprite/torso/upper_arm_L/lower_arm_L:scale")
+tracks/21/path = NodePath("CollisionPolygon2D/sprite/torso/upper_arm_L/lower_arm_L:scale")
 tracks/21/interp = 1
 tracks/21/loop_wrap = true
 tracks/21/keys = {
@@ -651,7 +630,7 @@ tracks/21/keys = {
 tracks/22/type = "value"
 tracks/22/imported = false
 tracks/22/enabled = true
-tracks/22/path = NodePath("sprite/torso/upper_arm_R:scale")
+tracks/22/path = NodePath("CollisionPolygon2D/sprite/torso/upper_arm_R:scale")
 tracks/22/interp = 1
 tracks/22/loop_wrap = true
 tracks/22/keys = {
@@ -663,7 +642,7 @@ tracks/22/keys = {
 tracks/23/type = "value"
 tracks/23/imported = false
 tracks/23/enabled = true
-tracks/23/path = NodePath("sprite/torso:position")
+tracks/23/path = NodePath("CollisionPolygon2D/sprite/torso:position")
 tracks/23/interp = 1
 tracks/23/loop_wrap = true
 tracks/23/keys = {
@@ -678,7 +657,7 @@ resource_name = "block"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("sprite/torso/head:position")
+tracks/0/path = NodePath("CollisionPolygon2D/sprite/torso/head:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -690,7 +669,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("sprite/torso/head:rotation")
+tracks/1/path = NodePath("CollisionPolygon2D/sprite/torso/head:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -702,7 +681,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("sprite/torso/upper_arm_L:position")
+tracks/2/path = NodePath("CollisionPolygon2D/sprite/torso/upper_arm_L:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -714,7 +693,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("sprite/torso/upper_arm_L:rotation")
+tracks/3/path = NodePath("CollisionPolygon2D/sprite/torso/upper_arm_L:rotation")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -726,7 +705,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("sprite/torso/upper_arm_L/lower_arm_L:position")
+tracks/4/path = NodePath("CollisionPolygon2D/sprite/torso/upper_arm_L/lower_arm_L:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -738,7 +717,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("sprite/torso/upper_arm_L/lower_arm_L:rotation")
+tracks/5/path = NodePath("CollisionPolygon2D/sprite/torso/upper_arm_L/lower_arm_L:rotation")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -750,7 +729,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("sprite/torso/upper_arm_R:position")
+tracks/6/path = NodePath("CollisionPolygon2D/sprite/torso/upper_arm_R:position")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -762,7 +741,7 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("sprite/torso/upper_arm_R:rotation")
+tracks/7/path = NodePath("CollisionPolygon2D/sprite/torso/upper_arm_R:rotation")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -774,7 +753,7 @@ tracks/7/keys = {
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("sprite/torso/upper_arm_R/lower_arm_R:position")
+tracks/8/path = NodePath("CollisionPolygon2D/sprite/torso/upper_arm_R/lower_arm_R:position")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
@@ -786,7 +765,7 @@ tracks/8/keys = {
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("sprite/torso/upper_arm_R/lower_arm_R:rotation")
+tracks/9/path = NodePath("CollisionPolygon2D/sprite/torso/upper_arm_R/lower_arm_R:rotation")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
@@ -798,7 +777,7 @@ tracks/9/keys = {
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("sprite/torso/upper_leg_R:position")
+tracks/10/path = NodePath("CollisionPolygon2D/sprite/torso/upper_leg_R:position")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
@@ -810,7 +789,7 @@ tracks/10/keys = {
 tracks/11/type = "value"
 tracks/11/imported = false
 tracks/11/enabled = true
-tracks/11/path = NodePath("sprite/torso/upper_leg_R:rotation")
+tracks/11/path = NodePath("CollisionPolygon2D/sprite/torso/upper_leg_R:rotation")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/keys = {
@@ -822,7 +801,7 @@ tracks/11/keys = {
 tracks/12/type = "value"
 tracks/12/imported = false
 tracks/12/enabled = true
-tracks/12/path = NodePath("sprite/torso/upper_leg_R/lower_leg_R:position")
+tracks/12/path = NodePath("CollisionPolygon2D/sprite/torso/upper_leg_R/lower_leg_R:position")
 tracks/12/interp = 1
 tracks/12/loop_wrap = true
 tracks/12/keys = {
@@ -834,7 +813,7 @@ tracks/12/keys = {
 tracks/13/type = "value"
 tracks/13/imported = false
 tracks/13/enabled = true
-tracks/13/path = NodePath("sprite/torso/upper_leg_R/lower_leg_R:rotation")
+tracks/13/path = NodePath("CollisionPolygon2D/sprite/torso/upper_leg_R/lower_leg_R:rotation")
 tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = {
@@ -846,7 +825,7 @@ tracks/13/keys = {
 tracks/14/type = "value"
 tracks/14/imported = false
 tracks/14/enabled = true
-tracks/14/path = NodePath("sprite/torso/upper_leg_L:position")
+tracks/14/path = NodePath("CollisionPolygon2D/sprite/torso/upper_leg_L:position")
 tracks/14/interp = 1
 tracks/14/loop_wrap = true
 tracks/14/keys = {
@@ -858,7 +837,7 @@ tracks/14/keys = {
 tracks/15/type = "value"
 tracks/15/imported = false
 tracks/15/enabled = true
-tracks/15/path = NodePath("sprite/torso/upper_leg_L:rotation")
+tracks/15/path = NodePath("CollisionPolygon2D/sprite/torso/upper_leg_L:rotation")
 tracks/15/interp = 1
 tracks/15/loop_wrap = true
 tracks/15/keys = {
@@ -870,7 +849,7 @@ tracks/15/keys = {
 tracks/16/type = "value"
 tracks/16/imported = false
 tracks/16/enabled = true
-tracks/16/path = NodePath("sprite/torso/upper_leg_L/lower_leg_L:position")
+tracks/16/path = NodePath("CollisionPolygon2D/sprite/torso/upper_leg_L/lower_leg_L:position")
 tracks/16/interp = 1
 tracks/16/loop_wrap = true
 tracks/16/keys = {
@@ -882,7 +861,7 @@ tracks/16/keys = {
 tracks/17/type = "value"
 tracks/17/imported = false
 tracks/17/enabled = true
-tracks/17/path = NodePath("sprite/torso/upper_leg_L/lower_leg_L:rotation")
+tracks/17/path = NodePath("CollisionPolygon2D/sprite/torso/upper_leg_L/lower_leg_L:rotation")
 tracks/17/interp = 1
 tracks/17/loop_wrap = true
 tracks/17/keys = {
@@ -894,7 +873,7 @@ tracks/17/keys = {
 tracks/18/type = "value"
 tracks/18/imported = false
 tracks/18/enabled = true
-tracks/18/path = NodePath("sprite/torso:rotation")
+tracks/18/path = NodePath("CollisionPolygon2D/sprite/torso:rotation")
 tracks/18/interp = 1
 tracks/18/loop_wrap = true
 tracks/18/keys = {
@@ -906,7 +885,7 @@ tracks/18/keys = {
 tracks/19/type = "value"
 tracks/19/imported = false
 tracks/19/enabled = true
-tracks/19/path = NodePath("sprite/torso:region_rect")
+tracks/19/path = NodePath("CollisionPolygon2D/sprite/torso:region_rect")
 tracks/19/interp = 1
 tracks/19/loop_wrap = true
 tracks/19/keys = {
@@ -918,7 +897,7 @@ tracks/19/keys = {
 tracks/20/type = "value"
 tracks/20/imported = false
 tracks/20/enabled = true
-tracks/20/path = NodePath("sprite/torso/upper_arm_R/lower_arm_R:scale")
+tracks/20/path = NodePath("CollisionPolygon2D/sprite/torso/upper_arm_R/lower_arm_R:scale")
 tracks/20/interp = 1
 tracks/20/loop_wrap = true
 tracks/20/keys = {
@@ -930,7 +909,7 @@ tracks/20/keys = {
 tracks/21/type = "value"
 tracks/21/imported = false
 tracks/21/enabled = true
-tracks/21/path = NodePath("sprite/torso/upper_arm_L/lower_arm_L:scale")
+tracks/21/path = NodePath("CollisionPolygon2D/sprite/torso/upper_arm_L/lower_arm_L:scale")
 tracks/21/interp = 1
 tracks/21/loop_wrap = true
 tracks/21/keys = {
@@ -942,7 +921,7 @@ tracks/21/keys = {
 tracks/22/type = "value"
 tracks/22/imported = false
 tracks/22/enabled = true
-tracks/22/path = NodePath("sprite/torso/upper_arm_R:scale")
+tracks/22/path = NodePath("CollisionPolygon2D/sprite/torso/upper_arm_R:scale")
 tracks/22/interp = 1
 tracks/22/loop_wrap = true
 tracks/22/keys = {
@@ -954,7 +933,7 @@ tracks/22/keys = {
 tracks/23/type = "value"
 tracks/23/imported = false
 tracks/23/enabled = true
-tracks/23/path = NodePath("sprite/torso:position")
+tracks/23/path = NodePath("CollisionPolygon2D/sprite/torso:position")
 tracks/23/interp = 1
 tracks/23/loop_wrap = true
 tracks/23/keys = {
@@ -966,7 +945,7 @@ tracks/23/keys = {
 tracks/24/type = "value"
 tracks/24/imported = false
 tracks/24/enabled = true
-tracks/24/path = NodePath("sprite/torso/upper_arm_L:scale")
+tracks/24/path = NodePath("CollisionPolygon2D/sprite/torso/upper_arm_L:scale")
 tracks/24/interp = 1
 tracks/24/loop_wrap = true
 tracks/24/keys = {
@@ -982,7 +961,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("sprite/torso/head:position")
+tracks/0/path = NodePath("CollisionPolygon2D/sprite/torso/head:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -994,7 +973,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("sprite/torso/head:rotation")
+tracks/1/path = NodePath("CollisionPolygon2D/sprite/torso/head:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -1006,7 +985,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("sprite/torso/upper_arm_L:position")
+tracks/2/path = NodePath("CollisionPolygon2D/sprite/torso/upper_arm_L:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -1018,7 +997,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("sprite/torso/upper_arm_L:rotation")
+tracks/3/path = NodePath("CollisionPolygon2D/sprite/torso/upper_arm_L:rotation")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -1030,7 +1009,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("sprite/torso/upper_arm_L/lower_arm_L:position")
+tracks/4/path = NodePath("CollisionPolygon2D/sprite/torso/upper_arm_L/lower_arm_L:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -1042,7 +1021,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("sprite/torso/upper_arm_L/lower_arm_L:rotation")
+tracks/5/path = NodePath("CollisionPolygon2D/sprite/torso/upper_arm_L/lower_arm_L:rotation")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -1054,7 +1033,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("sprite/torso/upper_arm_R:position")
+tracks/6/path = NodePath("CollisionPolygon2D/sprite/torso/upper_arm_R:position")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -1066,7 +1045,7 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("sprite/torso/upper_arm_R:rotation")
+tracks/7/path = NodePath("CollisionPolygon2D/sprite/torso/upper_arm_R:rotation")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -1078,7 +1057,7 @@ tracks/7/keys = {
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("sprite/torso/upper_arm_R/lower_arm_R:position")
+tracks/8/path = NodePath("CollisionPolygon2D/sprite/torso/upper_arm_R/lower_arm_R:position")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
@@ -1090,7 +1069,7 @@ tracks/8/keys = {
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("sprite/torso/upper_arm_R/lower_arm_R:rotation")
+tracks/9/path = NodePath("CollisionPolygon2D/sprite/torso/upper_arm_R/lower_arm_R:rotation")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
@@ -1102,7 +1081,7 @@ tracks/9/keys = {
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("sprite/torso/upper_leg_R:position")
+tracks/10/path = NodePath("CollisionPolygon2D/sprite/torso/upper_leg_R:position")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
@@ -1114,7 +1093,7 @@ tracks/10/keys = {
 tracks/11/type = "value"
 tracks/11/imported = false
 tracks/11/enabled = true
-tracks/11/path = NodePath("sprite/torso/upper_leg_R:rotation")
+tracks/11/path = NodePath("CollisionPolygon2D/sprite/torso/upper_leg_R:rotation")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/keys = {
@@ -1126,7 +1105,7 @@ tracks/11/keys = {
 tracks/12/type = "value"
 tracks/12/imported = false
 tracks/12/enabled = true
-tracks/12/path = NodePath("sprite/torso/upper_leg_R/lower_leg_R:position")
+tracks/12/path = NodePath("CollisionPolygon2D/sprite/torso/upper_leg_R/lower_leg_R:position")
 tracks/12/interp = 1
 tracks/12/loop_wrap = true
 tracks/12/keys = {
@@ -1138,7 +1117,7 @@ tracks/12/keys = {
 tracks/13/type = "value"
 tracks/13/imported = false
 tracks/13/enabled = true
-tracks/13/path = NodePath("sprite/torso/upper_leg_R/lower_leg_R:rotation")
+tracks/13/path = NodePath("CollisionPolygon2D/sprite/torso/upper_leg_R/lower_leg_R:rotation")
 tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = {
@@ -1150,7 +1129,7 @@ tracks/13/keys = {
 tracks/14/type = "value"
 tracks/14/imported = false
 tracks/14/enabled = true
-tracks/14/path = NodePath("sprite/torso/upper_leg_L:position")
+tracks/14/path = NodePath("CollisionPolygon2D/sprite/torso/upper_leg_L:position")
 tracks/14/interp = 1
 tracks/14/loop_wrap = true
 tracks/14/keys = {
@@ -1162,7 +1141,7 @@ tracks/14/keys = {
 tracks/15/type = "value"
 tracks/15/imported = false
 tracks/15/enabled = true
-tracks/15/path = NodePath("sprite/torso/upper_leg_L:rotation")
+tracks/15/path = NodePath("CollisionPolygon2D/sprite/torso/upper_leg_L:rotation")
 tracks/15/interp = 1
 tracks/15/loop_wrap = true
 tracks/15/keys = {
@@ -1174,7 +1153,7 @@ tracks/15/keys = {
 tracks/16/type = "value"
 tracks/16/imported = false
 tracks/16/enabled = true
-tracks/16/path = NodePath("sprite/torso/upper_leg_L/lower_leg_L:position")
+tracks/16/path = NodePath("CollisionPolygon2D/sprite/torso/upper_leg_L/lower_leg_L:position")
 tracks/16/interp = 1
 tracks/16/loop_wrap = true
 tracks/16/keys = {
@@ -1186,7 +1165,7 @@ tracks/16/keys = {
 tracks/17/type = "value"
 tracks/17/imported = false
 tracks/17/enabled = true
-tracks/17/path = NodePath("sprite/torso/upper_leg_L/lower_leg_L:rotation")
+tracks/17/path = NodePath("CollisionPolygon2D/sprite/torso/upper_leg_L/lower_leg_L:rotation")
 tracks/17/interp = 1
 tracks/17/loop_wrap = true
 tracks/17/keys = {
@@ -1198,7 +1177,7 @@ tracks/17/keys = {
 tracks/18/type = "value"
 tracks/18/imported = false
 tracks/18/enabled = true
-tracks/18/path = NodePath("sprite/torso:rotation")
+tracks/18/path = NodePath("CollisionPolygon2D/sprite/torso:rotation")
 tracks/18/interp = 1
 tracks/18/loop_wrap = true
 tracks/18/keys = {
@@ -1210,7 +1189,7 @@ tracks/18/keys = {
 tracks/19/type = "value"
 tracks/19/imported = false
 tracks/19/enabled = true
-tracks/19/path = NodePath("sprite/torso:region_rect")
+tracks/19/path = NodePath("CollisionPolygon2D/sprite/torso:region_rect")
 tracks/19/interp = 1
 tracks/19/loop_wrap = true
 tracks/19/keys = {
@@ -1222,7 +1201,7 @@ tracks/19/keys = {
 tracks/20/type = "value"
 tracks/20/imported = false
 tracks/20/enabled = true
-tracks/20/path = NodePath("sprite/torso/upper_arm_R/lower_arm_R:scale")
+tracks/20/path = NodePath("CollisionPolygon2D/sprite/torso/upper_arm_R/lower_arm_R:scale")
 tracks/20/interp = 1
 tracks/20/loop_wrap = true
 tracks/20/keys = {
@@ -1234,7 +1213,7 @@ tracks/20/keys = {
 tracks/21/type = "value"
 tracks/21/imported = false
 tracks/21/enabled = true
-tracks/21/path = NodePath("sprite/torso/upper_arm_L/lower_arm_L:scale")
+tracks/21/path = NodePath("CollisionPolygon2D/sprite/torso/upper_arm_L/lower_arm_L:scale")
 tracks/21/interp = 1
 tracks/21/loop_wrap = true
 tracks/21/keys = {
@@ -1246,7 +1225,7 @@ tracks/21/keys = {
 tracks/22/type = "value"
 tracks/22/imported = false
 tracks/22/enabled = true
-tracks/22/path = NodePath("sprite/torso/upper_arm_R:scale")
+tracks/22/path = NodePath("CollisionPolygon2D/sprite/torso/upper_arm_R:scale")
 tracks/22/interp = 1
 tracks/22/loop_wrap = true
 tracks/22/keys = {
@@ -1258,7 +1237,7 @@ tracks/22/keys = {
 tracks/23/type = "value"
 tracks/23/imported = false
 tracks/23/enabled = true
-tracks/23/path = NodePath("sprite/torso:position")
+tracks/23/path = NodePath("CollisionPolygon2D/sprite/torso:position")
 tracks/23/interp = 1
 tracks/23/loop_wrap = true
 tracks/23/keys = {
@@ -1274,7 +1253,7 @@ step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("sprite/torso/head:position")
+tracks/0/path = NodePath("CollisionPolygon2D/sprite/torso/head:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -1286,7 +1265,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("sprite/torso/head:rotation")
+tracks/1/path = NodePath("CollisionPolygon2D/sprite/torso/head:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -1298,7 +1277,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("sprite/torso/upper_arm_L:position")
+tracks/2/path = NodePath("CollisionPolygon2D/sprite/torso/upper_arm_L:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -1310,7 +1289,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("sprite/torso/upper_arm_L:rotation")
+tracks/3/path = NodePath("CollisionPolygon2D/sprite/torso/upper_arm_L:rotation")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -1322,7 +1301,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("sprite/torso/upper_arm_L/lower_arm_L:position")
+tracks/4/path = NodePath("CollisionPolygon2D/sprite/torso/upper_arm_L/lower_arm_L:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -1334,7 +1313,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("sprite/torso/upper_arm_L/lower_arm_L:rotation")
+tracks/5/path = NodePath("CollisionPolygon2D/sprite/torso/upper_arm_L/lower_arm_L:rotation")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -1346,7 +1325,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("sprite/torso/upper_arm_R:position")
+tracks/6/path = NodePath("CollisionPolygon2D/sprite/torso/upper_arm_R:position")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -1358,7 +1337,7 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("sprite/torso/upper_arm_R:rotation")
+tracks/7/path = NodePath("CollisionPolygon2D/sprite/torso/upper_arm_R:rotation")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -1370,7 +1349,7 @@ tracks/7/keys = {
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("sprite/torso/upper_arm_R/lower_arm_R:position")
+tracks/8/path = NodePath("CollisionPolygon2D/sprite/torso/upper_arm_R/lower_arm_R:position")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
@@ -1382,7 +1361,7 @@ tracks/8/keys = {
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("sprite/torso/upper_arm_R/lower_arm_R:rotation")
+tracks/9/path = NodePath("CollisionPolygon2D/sprite/torso/upper_arm_R/lower_arm_R:rotation")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
@@ -1394,7 +1373,7 @@ tracks/9/keys = {
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("sprite/torso/upper_leg_R:position")
+tracks/10/path = NodePath("CollisionPolygon2D/sprite/torso/upper_leg_R:position")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
@@ -1406,7 +1385,7 @@ tracks/10/keys = {
 tracks/11/type = "value"
 tracks/11/imported = false
 tracks/11/enabled = true
-tracks/11/path = NodePath("sprite/torso/upper_leg_R:rotation")
+tracks/11/path = NodePath("CollisionPolygon2D/sprite/torso/upper_leg_R:rotation")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/keys = {
@@ -1418,7 +1397,7 @@ tracks/11/keys = {
 tracks/12/type = "value"
 tracks/12/imported = false
 tracks/12/enabled = true
-tracks/12/path = NodePath("sprite/torso/upper_leg_R/lower_leg_R:position")
+tracks/12/path = NodePath("CollisionPolygon2D/sprite/torso/upper_leg_R/lower_leg_R:position")
 tracks/12/interp = 1
 tracks/12/loop_wrap = true
 tracks/12/keys = {
@@ -1430,7 +1409,7 @@ tracks/12/keys = {
 tracks/13/type = "value"
 tracks/13/imported = false
 tracks/13/enabled = true
-tracks/13/path = NodePath("sprite/torso/upper_leg_R/lower_leg_R:rotation")
+tracks/13/path = NodePath("CollisionPolygon2D/sprite/torso/upper_leg_R/lower_leg_R:rotation")
 tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = {
@@ -1442,7 +1421,7 @@ tracks/13/keys = {
 tracks/14/type = "value"
 tracks/14/imported = false
 tracks/14/enabled = true
-tracks/14/path = NodePath("sprite/torso/upper_leg_L:position")
+tracks/14/path = NodePath("CollisionPolygon2D/sprite/torso/upper_leg_L:position")
 tracks/14/interp = 1
 tracks/14/loop_wrap = true
 tracks/14/keys = {
@@ -1454,7 +1433,7 @@ tracks/14/keys = {
 tracks/15/type = "value"
 tracks/15/imported = false
 tracks/15/enabled = true
-tracks/15/path = NodePath("sprite/torso/upper_leg_L:rotation")
+tracks/15/path = NodePath("CollisionPolygon2D/sprite/torso/upper_leg_L:rotation")
 tracks/15/interp = 1
 tracks/15/loop_wrap = true
 tracks/15/keys = {
@@ -1466,7 +1445,7 @@ tracks/15/keys = {
 tracks/16/type = "value"
 tracks/16/imported = false
 tracks/16/enabled = true
-tracks/16/path = NodePath("sprite/torso/upper_leg_L/lower_leg_L:position")
+tracks/16/path = NodePath("CollisionPolygon2D/sprite/torso/upper_leg_L/lower_leg_L:position")
 tracks/16/interp = 1
 tracks/16/loop_wrap = true
 tracks/16/keys = {
@@ -1478,7 +1457,7 @@ tracks/16/keys = {
 tracks/17/type = "value"
 tracks/17/imported = false
 tracks/17/enabled = true
-tracks/17/path = NodePath("sprite/torso/upper_leg_L/lower_leg_L:rotation")
+tracks/17/path = NodePath("CollisionPolygon2D/sprite/torso/upper_leg_L/lower_leg_L:rotation")
 tracks/17/interp = 1
 tracks/17/loop_wrap = true
 tracks/17/keys = {
@@ -1490,7 +1469,7 @@ tracks/17/keys = {
 tracks/18/type = "value"
 tracks/18/imported = false
 tracks/18/enabled = true
-tracks/18/path = NodePath("sprite/torso:rotation")
+tracks/18/path = NodePath("CollisionPolygon2D/sprite/torso:rotation")
 tracks/18/interp = 1
 tracks/18/loop_wrap = true
 tracks/18/keys = {
@@ -1502,7 +1481,7 @@ tracks/18/keys = {
 tracks/19/type = "value"
 tracks/19/imported = false
 tracks/19/enabled = true
-tracks/19/path = NodePath("sprite/torso:region_rect")
+tracks/19/path = NodePath("CollisionPolygon2D/sprite/torso:region_rect")
 tracks/19/interp = 1
 tracks/19/loop_wrap = true
 tracks/19/keys = {
@@ -1514,7 +1493,7 @@ tracks/19/keys = {
 tracks/20/type = "value"
 tracks/20/imported = false
 tracks/20/enabled = true
-tracks/20/path = NodePath("sprite/torso/upper_arm_R/lower_arm_R:scale")
+tracks/20/path = NodePath("CollisionPolygon2D/sprite/torso/upper_arm_R/lower_arm_R:scale")
 tracks/20/interp = 1
 tracks/20/loop_wrap = true
 tracks/20/keys = {
@@ -1526,7 +1505,7 @@ tracks/20/keys = {
 tracks/21/type = "value"
 tracks/21/imported = false
 tracks/21/enabled = true
-tracks/21/path = NodePath("sprite/torso/upper_arm_L/lower_arm_L:scale")
+tracks/21/path = NodePath("CollisionPolygon2D/sprite/torso/upper_arm_L/lower_arm_L:scale")
 tracks/21/interp = 1
 tracks/21/loop_wrap = true
 tracks/21/keys = {
@@ -1538,7 +1517,7 @@ tracks/21/keys = {
 tracks/22/type = "value"
 tracks/22/imported = false
 tracks/22/enabled = true
-tracks/22/path = NodePath("sprite/torso/upper_arm_R:scale")
+tracks/22/path = NodePath("CollisionPolygon2D/sprite/torso/upper_arm_R:scale")
 tracks/22/interp = 1
 tracks/22/loop_wrap = true
 tracks/22/keys = {
@@ -1550,7 +1529,7 @@ tracks/22/keys = {
 tracks/23/type = "value"
 tracks/23/imported = false
 tracks/23/enabled = true
-tracks/23/path = NodePath("sprite/torso:position")
+tracks/23/path = NodePath("CollisionPolygon2D/sprite/torso:position")
 tracks/23/interp = 1
 tracks/23/loop_wrap = true
 tracks/23/keys = {
@@ -1562,7 +1541,7 @@ tracks/23/keys = {
 tracks/24/type = "method"
 tracks/24/imported = false
 tracks/24/enabled = true
-tracks/24/path = NodePath("JumpState")
+tracks/24/path = NodePath("CollisionPolygon2D/JumpState")
 tracks/24/interp = 1
 tracks/24/loop_wrap = true
 tracks/24/keys = {
@@ -1583,23 +1562,23 @@ step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("sprite/torso/head:position")
+tracks/0/path = NodePath("CollisionPolygon2D/sprite/torso/head:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.49088144, 0.8, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(17.692976, -88.74579), Vector2(14.559158, -100.658485), Vector2(-3.0823898, -90.56648), Vector2(17.692976, -88.74579)]
+"values": [Vector2(17.692976, -88.74579), Vector2(-3.0823898, -90.56648)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("sprite/torso/head:rotation")
+tracks/1/path = NodePath("CollisionPolygon2D/sprite/torso/head:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.4024812, 0.8, 1),
+"times": PackedFloat32Array(0, 0.4, 0.8, 1),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [0.22651565, -0.21906297, -0.36833572, 0.22651565]
@@ -1607,11 +1586,11 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("sprite/torso/upper_arm_L:position")
+tracks/2/path = NodePath("CollisionPolygon2D/sprite/torso/upper_arm_L:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.41829646, 0.8),
+"times": PackedFloat32Array(0, 0.4, 1),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector2(66.66675, -26.666626), Vector2(19.59121, -11.935152), Vector2(-62.593597, -30.760342)]
@@ -1619,11 +1598,11 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("sprite/torso/upper_arm_L:rotation")
+tracks/3/path = NodePath("CollisionPolygon2D/sprite/torso/upper_arm_L:rotation")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.8),
+"times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [0.0, 1.3037188]
@@ -1631,11 +1610,11 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("sprite/torso/upper_arm_L/lower_arm_L:position")
+tracks/4/path = NodePath("CollisionPolygon2D/sprite/torso/upper_arm_L/lower_arm_L:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.42999995, 0.8),
+"times": PackedFloat32Array(0, 0.4, 1),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector2(75, 58.333252), Vector2(61.63719, 94.20096), Vector2(86.06689, 11.9794655)]
@@ -1643,11 +1622,11 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("sprite/torso/upper_arm_L/lower_arm_L:rotation")
+tracks/5/path = NodePath("CollisionPolygon2D/sprite/torso/upper_arm_L/lower_arm_L:rotation")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.42999995, 0.8),
+"times": PackedFloat32Array(0, 0.4, 1),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [-0.5235988, -0.052870438, -1.261631]
@@ -1655,95 +1634,95 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("sprite/torso/upper_arm_R:position")
+tracks/6/path = NodePath("CollisionPolygon2D/sprite/torso/upper_arm_R:position")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat32Array(-0.0018789917, 0.3, 0.7, 0.9, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(-70.1575, -82.660286), Vector2(-69.83183, -33.019535), Vector2(30.834745, -36.200043), Vector2(30.834745, -36.200043), Vector2(5.845337, -21.624847)]
+"values": [Vector2(-70.15547, -82.3513), Vector2(-70.15547, -82.3513), Vector2(-26.925163, 8.396471), Vector2(21.300468, -18.388227), Vector2(30.834745, -36.200043), Vector2(5.845337, -21.624847)]
 }
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("sprite/torso/upper_arm_R:rotation")
+tracks/7/path = NodePath("CollisionPolygon2D/sprite/torso/upper_arm_R:rotation")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
-"times": PackedFloat32Array(-0.0018789917, 0.5, 0.7, 0.9, 1),
+"times": PackedFloat32Array(0, 0.1, 0.6, 0.8, 1),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
-"values": [1.7089827, -0.18640041, -1.92648, -1.92648, -1.535198]
+"values": [1.8634762, 1.8634762, -1.92648, -1.92648, -1.535198]
 }
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("sprite/torso/upper_arm_R/lower_arm_R:position")
+tracks/8/path = NodePath("CollisionPolygon2D/sprite/torso/upper_arm_R/lower_arm_R:position")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
-"times": PackedFloat32Array(-0.00096197426, 0.19817412, 0.49899435, 0.7, 0.9, 1),
+"times": PackedFloat32Array(0, 0.1, 0.4, 0.6, 0.8, 1),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(32.358017, 45.669548), Vector2(28.557917, 45.653503), Vector2(48.895897, 69.626274), Vector2(-14.6964, 131.8944), Vector2(-14.6964, 131.8944), Vector2(23.225975, 97.84743)]
+"values": [Vector2(34.50905, 64.036865), Vector2(34.50905, 64.036865), Vector2(35.68973, 50.622032), Vector2(-16.13743, 110.994484), Vector2(-14.6964, 131.8944), Vector2(23.225975, 97.84743)]
 }
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("sprite/torso/upper_arm_R/lower_arm_R:rotation")
+tracks/9/path = NodePath("CollisionPolygon2D/sprite/torso/upper_arm_R/lower_arm_R:rotation")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
-"times": PackedFloat32Array(-0.0019239411, 0.19817412, 0.49899435, 0.7, 0.9, 1),
+"times": PackedFloat32Array(0, 0.1, 0.4, 0.6, 0.8, 1),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [-0.6971049, -0.8873991, -0.5560329, 1.0413585, 1.0413585, 0.10221821]
+"values": [-0.69642794, -0.69642794, -0.6937896, 1.0413585, 1.0413585, 0.10221821]
 }
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("sprite/torso:rotation")
+tracks/10/path = NodePath("CollisionPolygon2D/sprite/torso:rotation")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
-"times": PackedFloat32Array(0, 0.6, 0.8, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
-"values": [-0.16044182, 0.2939278, 0.2939278, 0.0]
+"values": [-0.29304552, -0.29304552, 0.2939278, 0.2939278, 0.0]
 }
 tracks/11/type = "value"
 tracks/11/imported = false
 tracks/11/enabled = true
-tracks/11/path = NodePath("sprite/torso:region_rect")
-tracks/11/interp = 1
+tracks/11/path = NodePath("CollisionPolygon2D/sprite/torso:region_rect")
+tracks/11/interp = 0
 tracks/11/loop_wrap = true
 tracks/11/keys = {
-"times": PackedFloat32Array(0, 0.39999998),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.39999998),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [Rect2(64.21061, 12.5, 132.85443, 172.62988), Rect2(284.68243, 178.10081, 117.59787, 164.72444)]
+"values": [Rect2(64.21061, 12.5, 132.85443, 172.62988), Rect2(64.21061, 12.5, 132.85443, 172.62988), Rect2(284.68243, 178.10081, 117.59787, 164.72444)]
 }
 tracks/12/type = "value"
 tracks/12/imported = false
 tracks/12/enabled = true
-tracks/12/path = NodePath("sprite/torso/upper_arm_R/lower_arm_R:scale")
+tracks/12/path = NodePath("CollisionPolygon2D/sprite/torso/upper_arm_R/lower_arm_R:scale")
 tracks/12/interp = 1
 tracks/12/loop_wrap = true
 tracks/12/keys = {
-"times": PackedFloat32Array(-0.0019239411, 0.5, 0.7, 0.9, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(1, 1), Vector2(1, 1), Vector2(1.4, 1.4), Vector2(1.4, 1.4), Vector2(1.2, 1.2)]
+"values": [Vector2(0.9, 1.2), Vector2(0.9, 1.2), Vector2(1, 1), Vector2(1.2, 1.2), Vector2(1.3, 1.2), Vector2(1.2, 1.2)]
 }
 tracks/13/type = "value"
 tracks/13/imported = false
 tracks/13/enabled = true
-tracks/13/path = NodePath("sprite/torso/upper_arm_L/lower_arm_L:scale")
+tracks/13/path = NodePath("CollisionPolygon2D/sprite/torso/upper_arm_L/lower_arm_L:scale")
 tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = {
-"times": PackedFloat32Array(0.8),
+"times": PackedFloat32Array(1),
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(1, 1)]
@@ -1751,31 +1730,31 @@ tracks/13/keys = {
 tracks/14/type = "value"
 tracks/14/imported = false
 tracks/14/enabled = true
-tracks/14/path = NodePath("sprite/torso/upper_arm_R:scale")
+tracks/14/path = NodePath("CollisionPolygon2D/sprite/torso/upper_arm_R:scale")
 tracks/14/interp = 1
 tracks/14/loop_wrap = true
 tracks/14/keys = {
-"times": PackedFloat32Array(0, 0.7, 0.9, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(0.9, 0.9), Vector2(1, 1.1), Vector2(1, 1.1), Vector2(1, 1)]
+"values": [Vector2(0.9, 0.9), Vector2(0.9, 0.9), Vector2(1, 1.1), Vector2(1, 1.1), Vector2(1, 1)]
 }
 tracks/15/type = "value"
 tracks/15/imported = false
 tracks/15/enabled = true
-tracks/15/path = NodePath("sprite/torso:position")
+tracks/15/path = NodePath("CollisionPolygon2D/sprite/torso:position")
 tracks/15/interp = 1
 tracks/15/loop_wrap = true
 tracks/15/keys = {
-"times": PackedFloat32Array(0, 0.59999996),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.59999996),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(0, -11), Vector2(10, -10.999999)]
+"values": [Vector2(0, -11), Vector2(0, -11), Vector2(10, -10.999999)]
 }
 tracks/16/type = "method"
 tracks/16/imported = false
 tracks/16/enabled = true
-tracks/16/path = NodePath("PunchState")
+tracks/16/path = NodePath("CollisionPolygon2D/PunchState")
 tracks/16/interp = 1
 tracks/16/loop_wrap = true
 tracks/16/keys = {
@@ -1786,6 +1765,54 @@ tracks/16/keys = {
 "method": &"end"
 }]
 }
+tracks/17/type = "value"
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/path = NodePath("CollisionPolygon2D/PunchState/dmgArea2D/start:disabled")
+tracks/17/interp = 0
+tracks/17/loop_wrap = true
+tracks/17/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+tracks/18/type = "value"
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/path = NodePath("CollisionPolygon2D/PunchState/dmgArea2D/middle:disabled")
+tracks/18/interp = 0
+tracks/18/loop_wrap = true
+tracks/18/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+tracks/19/type = "value"
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/path = NodePath("CollisionPolygon2D/PunchState/dmgArea2D/end:disabled")
+tracks/19/interp = 0
+tracks/19/loop_wrap = true
+tracks/19/keys = {
+"times": PackedFloat32Array(0, 0.7, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+tracks/20/type = "value"
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/path = NodePath("CollisionPolygon2D/PunchState/dmgArea2D:monitoring")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
 
 [sub_resource type="Animation" id="Animation_irmqu"]
 resource_name = "punch_lower"
@@ -1793,7 +1820,7 @@ step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("sprite/torso/upper_arm_L:position")
+tracks/0/path = NodePath("CollisionPolygon2D/sprite/torso/upper_arm_L:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -1805,7 +1832,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("sprite/torso/upper_arm_L:rotation")
+tracks/1/path = NodePath("CollisionPolygon2D/sprite/torso/upper_arm_L:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -1817,7 +1844,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("sprite/torso/upper_leg_R/lower_leg_R:position")
+tracks/2/path = NodePath("CollisionPolygon2D/sprite/torso/upper_leg_R/lower_leg_R:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -1829,7 +1856,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("sprite/torso/upper_leg_R/lower_leg_R:rotation")
+tracks/3/path = NodePath("CollisionPolygon2D/sprite/torso/upper_leg_R/lower_leg_R:rotation")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -1841,7 +1868,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("sprite/torso/upper_leg_L:position")
+tracks/4/path = NodePath("CollisionPolygon2D/sprite/torso/upper_leg_L:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -1853,7 +1880,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("sprite/torso/upper_leg_L:rotation")
+tracks/5/path = NodePath("CollisionPolygon2D/sprite/torso/upper_leg_L:rotation")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -1865,7 +1892,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("sprite/torso/upper_leg_L/lower_leg_L:position")
+tracks/6/path = NodePath("CollisionPolygon2D/sprite/torso/upper_leg_L/lower_leg_L:position")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -1877,7 +1904,7 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("sprite/torso/upper_leg_L/lower_leg_L:rotation")
+tracks/7/path = NodePath("CollisionPolygon2D/sprite/torso/upper_leg_L/lower_leg_L:rotation")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -1894,7 +1921,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("sprite/torso/head:position")
+tracks/0/path = NodePath("CollisionPolygon2D/sprite/torso/head:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -1906,7 +1933,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("sprite/torso/head:rotation")
+tracks/1/path = NodePath("CollisionPolygon2D/sprite/torso/head:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -1918,7 +1945,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("sprite/torso/upper_arm_L:position")
+tracks/2/path = NodePath("CollisionPolygon2D/sprite/torso/upper_arm_L:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -1930,7 +1957,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("sprite/torso/upper_arm_L:rotation")
+tracks/3/path = NodePath("CollisionPolygon2D/sprite/torso/upper_arm_L:rotation")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -1942,7 +1969,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("sprite/torso/upper_arm_L/lower_arm_L:position")
+tracks/4/path = NodePath("CollisionPolygon2D/sprite/torso/upper_arm_L/lower_arm_L:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -1954,7 +1981,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("sprite/torso/upper_arm_L/lower_arm_L:rotation")
+tracks/5/path = NodePath("CollisionPolygon2D/sprite/torso/upper_arm_L/lower_arm_L:rotation")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -1966,7 +1993,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("sprite/torso/upper_arm_R:position")
+tracks/6/path = NodePath("CollisionPolygon2D/sprite/torso/upper_arm_R:position")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -1978,7 +2005,7 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("sprite/torso/upper_arm_R:rotation")
+tracks/7/path = NodePath("CollisionPolygon2D/sprite/torso/upper_arm_R:rotation")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -1990,7 +2017,7 @@ tracks/7/keys = {
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("sprite/torso/upper_arm_R/lower_arm_R:position")
+tracks/8/path = NodePath("CollisionPolygon2D/sprite/torso/upper_arm_R/lower_arm_R:position")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
@@ -2002,7 +2029,7 @@ tracks/8/keys = {
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("sprite/torso/upper_arm_R/lower_arm_R:rotation")
+tracks/9/path = NodePath("CollisionPolygon2D/sprite/torso/upper_arm_R/lower_arm_R:rotation")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
@@ -2014,7 +2041,7 @@ tracks/9/keys = {
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("sprite/torso/upper_leg_R:position")
+tracks/10/path = NodePath("CollisionPolygon2D/sprite/torso/upper_leg_R:position")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
@@ -2026,7 +2053,7 @@ tracks/10/keys = {
 tracks/11/type = "value"
 tracks/11/imported = false
 tracks/11/enabled = true
-tracks/11/path = NodePath("sprite/torso/upper_leg_R:rotation")
+tracks/11/path = NodePath("CollisionPolygon2D/sprite/torso/upper_leg_R:rotation")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/keys = {
@@ -2038,7 +2065,7 @@ tracks/11/keys = {
 tracks/12/type = "value"
 tracks/12/imported = false
 tracks/12/enabled = true
-tracks/12/path = NodePath("sprite/torso/upper_leg_R/lower_leg_R:position")
+tracks/12/path = NodePath("CollisionPolygon2D/sprite/torso/upper_leg_R/lower_leg_R:position")
 tracks/12/interp = 1
 tracks/12/loop_wrap = true
 tracks/12/keys = {
@@ -2050,7 +2077,7 @@ tracks/12/keys = {
 tracks/13/type = "value"
 tracks/13/imported = false
 tracks/13/enabled = true
-tracks/13/path = NodePath("sprite/torso/upper_leg_R/lower_leg_R:rotation")
+tracks/13/path = NodePath("CollisionPolygon2D/sprite/torso/upper_leg_R/lower_leg_R:rotation")
 tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = {
@@ -2062,7 +2089,7 @@ tracks/13/keys = {
 tracks/14/type = "value"
 tracks/14/imported = false
 tracks/14/enabled = true
-tracks/14/path = NodePath("sprite/torso/upper_leg_L:position")
+tracks/14/path = NodePath("CollisionPolygon2D/sprite/torso/upper_leg_L:position")
 tracks/14/interp = 1
 tracks/14/loop_wrap = true
 tracks/14/keys = {
@@ -2074,7 +2101,7 @@ tracks/14/keys = {
 tracks/15/type = "value"
 tracks/15/imported = false
 tracks/15/enabled = true
-tracks/15/path = NodePath("sprite/torso/upper_leg_L:rotation")
+tracks/15/path = NodePath("CollisionPolygon2D/sprite/torso/upper_leg_L:rotation")
 tracks/15/interp = 1
 tracks/15/loop_wrap = true
 tracks/15/keys = {
@@ -2086,7 +2113,7 @@ tracks/15/keys = {
 tracks/16/type = "value"
 tracks/16/imported = false
 tracks/16/enabled = true
-tracks/16/path = NodePath("sprite/torso/upper_leg_L/lower_leg_L:position")
+tracks/16/path = NodePath("CollisionPolygon2D/sprite/torso/upper_leg_L/lower_leg_L:position")
 tracks/16/interp = 1
 tracks/16/loop_wrap = true
 tracks/16/keys = {
@@ -2098,7 +2125,7 @@ tracks/16/keys = {
 tracks/17/type = "value"
 tracks/17/imported = false
 tracks/17/enabled = true
-tracks/17/path = NodePath("sprite/torso/upper_leg_L/lower_leg_L:rotation")
+tracks/17/path = NodePath("CollisionPolygon2D/sprite/torso/upper_leg_L/lower_leg_L:rotation")
 tracks/17/interp = 1
 tracks/17/loop_wrap = true
 tracks/17/keys = {
@@ -2110,7 +2137,7 @@ tracks/17/keys = {
 tracks/18/type = "value"
 tracks/18/imported = false
 tracks/18/enabled = true
-tracks/18/path = NodePath("sprite/torso:rotation")
+tracks/18/path = NodePath("CollisionPolygon2D/sprite/torso:rotation")
 tracks/18/interp = 1
 tracks/18/loop_wrap = true
 tracks/18/keys = {
@@ -2122,7 +2149,7 @@ tracks/18/keys = {
 tracks/19/type = "value"
 tracks/19/imported = false
 tracks/19/enabled = true
-tracks/19/path = NodePath("sprite/torso:region_rect")
+tracks/19/path = NodePath("CollisionPolygon2D/sprite/torso:region_rect")
 tracks/19/interp = 1
 tracks/19/loop_wrap = true
 tracks/19/keys = {
@@ -2134,7 +2161,7 @@ tracks/19/keys = {
 tracks/20/type = "value"
 tracks/20/imported = false
 tracks/20/enabled = true
-tracks/20/path = NodePath("sprite/torso/upper_arm_R/lower_arm_R:scale")
+tracks/20/path = NodePath("CollisionPolygon2D/sprite/torso/upper_arm_R/lower_arm_R:scale")
 tracks/20/interp = 1
 tracks/20/loop_wrap = true
 tracks/20/keys = {
@@ -2146,7 +2173,7 @@ tracks/20/keys = {
 tracks/21/type = "value"
 tracks/21/imported = false
 tracks/21/enabled = true
-tracks/21/path = NodePath("sprite/torso/upper_arm_L/lower_arm_L:scale")
+tracks/21/path = NodePath("CollisionPolygon2D/sprite/torso/upper_arm_L/lower_arm_L:scale")
 tracks/21/interp = 1
 tracks/21/loop_wrap = true
 tracks/21/keys = {
@@ -2158,7 +2185,7 @@ tracks/21/keys = {
 tracks/22/type = "value"
 tracks/22/imported = false
 tracks/22/enabled = true
-tracks/22/path = NodePath("sprite/torso/upper_arm_R:scale")
+tracks/22/path = NodePath("CollisionPolygon2D/sprite/torso/upper_arm_R:scale")
 tracks/22/interp = 1
 tracks/22/loop_wrap = true
 tracks/22/keys = {
@@ -2170,7 +2197,7 @@ tracks/22/keys = {
 tracks/23/type = "value"
 tracks/23/imported = false
 tracks/23/enabled = true
-tracks/23/path = NodePath("sprite/torso:position")
+tracks/23/path = NodePath("CollisionPolygon2D/sprite/torso:position")
 tracks/23/interp = 1
 tracks/23/loop_wrap = true
 tracks/23/keys = {
@@ -2182,7 +2209,7 @@ tracks/23/keys = {
 tracks/24/type = "value"
 tracks/24/imported = false
 tracks/24/enabled = true
-tracks/24/path = NodePath("sprite/torso/upper_arm_L:scale")
+tracks/24/path = NodePath("CollisionPolygon2D/sprite/torso/upper_arm_L:scale")
 tracks/24/interp = 1
 tracks/24/loop_wrap = true
 tracks/24/keys = {
@@ -2207,25 +2234,32 @@ _data = {
 [node name="Character" type="CharacterBody2D" unique_id=610269851]
 script = ExtResource("1_wdpcj")
 
-[node name="SS2D_Shape" type="Node2D" parent="." unique_id=1827987772]
-z_index = -10
-script = ExtResource("2_qi5as")
-_points = SubResource("Resource_nwk8b")
-shape_material = SubResource("Resource_x2ust")
-collision_polygon_node_path = NodePath("../CollisionPolygon2D")
-metadata/_custom_type_script = "uid://dhdc4b8yddyej"
-
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=1393552245]
 polygon = PackedVector2Array(-5.0510406, -51.13327, 11.00386, -52.301384, 17.616806, -33.936844, 30.807266, -23.446213, 20.038803, 10.495178, 0.23703003, 38.669403, -24.080559, -1.1776505, -23.4729, -28.527779, -8.2343445, -35.260185)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=160804102]
+[node name="GroundState" type="Node2D" parent="CollisionPolygon2D" unique_id=1141125736]
 unique_name_in_owner = true
-libraries/ = SubResource("AnimationLibrary_0m7cd")
+script = ExtResource("8_sm1rv")
 
-[node name="sprite" type="Node2D" parent="." unique_id=1239840786]
+[node name="AirState" type="Node2D" parent="CollisionPolygon2D" unique_id=949493251]
+unique_name_in_owner = true
+script = ExtResource("9_qi5as")
+
+[node name="JumpState" type="Node2D" parent="CollisionPolygon2D" unique_id=120444797]
+unique_name_in_owner = true
+script = ExtResource("10_2hyy3")
+
+[node name="PunchState" type="Node2D" parent="CollisionPolygon2D" unique_id=1857172629]
+unique_name_in_owner = true
+script = ExtResource("11_irmqu")
+
+[node name="dmgArea2D" parent="CollisionPolygon2D/PunchState" unique_id=2075851471 instance=ExtResource("6_2cgup")]
+position = Vector2(60, -15)
+
+[node name="sprite" type="Node2D" parent="CollisionPolygon2D" unique_id=1239840786]
 unique_name_in_owner = true
 
-[node name="torso" type="Sprite2D" parent="sprite" unique_id=1249608246]
+[node name="torso" type="Sprite2D" parent="CollisionPolygon2D/sprite" unique_id=1249608246]
 z_index = -1
 position = Vector2(4, -10.999999)
 rotation = -0.015309751
@@ -2234,22 +2268,22 @@ texture = ExtResource("7_x1sy7")
 region_enabled = true
 region_rect = Rect2(62.29088, 7.5, 147.75868, 178.02414)
 
-[node name="head" type="Sprite2D" parent="sprite/torso" unique_id=74231871]
+[node name="head" type="Sprite2D" parent="CollisionPolygon2D/sprite/torso" unique_id=74231871]
 position = Vector2(4.7598205, -96.085106)
 scale = Vector2(0.85, 0.85)
 texture = ExtResource("7_x1sy7")
 region_enabled = true
 region_rect = Rect2(237.18747, 14.1649475, 120.66116, 133.05786)
 
-[node name="upper_arm_L" type="Sprite2D" parent="sprite/torso" unique_id=1886606432]
-z_index = -3
+[node name="upper_arm_L" type="Sprite2D" parent="CollisionPolygon2D/sprite/torso" unique_id=1886606432]
+z_index = -4
 position = Vector2(66.66675, -26.666626)
 scale = Vector2(0.9, 0.9)
 texture = ExtResource("7_x1sy7")
 region_enabled = true
 region_rect = Rect2(397.32318, 166.33058, 106.61157, 147.93388)
 
-[node name="lower_arm_L" type="Sprite2D" parent="sprite/torso/upper_arm_L" unique_id=897333698]
+[node name="lower_arm_L" type="Sprite2D" parent="CollisionPolygon2D/sprite/torso/upper_arm_L" unique_id=897333698]
 z_index = 1
 position = Vector2(75, 58.333252)
 rotation = -0.5235988
@@ -2257,21 +2291,21 @@ texture = ExtResource("7_x1sy7")
 region_enabled = true
 region_rect = Rect2(350.21576, 392.77686, 144.62811, 109.91736)
 
-[node name="upper_arm_R" type="Sprite2D" parent="sprite/torso" unique_id=1869904316]
+[node name="upper_arm_R" type="Sprite2D" parent="CollisionPolygon2D/sprite/torso" unique_id=1869904316]
 position = Vector2(-76.666626, -23.333252)
 scale = Vector2(0.9, 0.9)
 texture = ExtResource("7_x1sy7")
 region_enabled = true
 region_rect = Rect2(376.66205, 17.570229, 109.09088, 152.89258)
 
-[node name="lower_arm_R" type="Sprite2D" parent="sprite/torso/upper_arm_R" unique_id=165495380]
+[node name="lower_arm_R" type="Sprite2D" parent="CollisionPolygon2D/sprite/torso/upper_arm_R" unique_id=165495380]
 position = Vector2(25.925781, 81.481445)
 scale = Vector2(1, 1.2)
 texture = ExtResource("7_x1sy7")
 region_enabled = true
 region_rect = Rect2(346.0835, 385.33884, 147.10748, 113.223145)
 
-[node name="upper_leg_R" type="Sprite2D" parent="sprite/torso" unique_id=1346973327]
+[node name="upper_leg_R" type="Sprite2D" parent="CollisionPolygon2D/sprite/torso" unique_id=1346973327]
 z_index = -1
 position = Vector2(-26.666664, 110)
 rotation = 0.18675023
@@ -2280,7 +2314,7 @@ texture = ExtResource("7_x1sy7")
 region_enabled = true
 region_rect = Rect2(16.459671, 180.87715, 104.935684, 141.57005)
 
-[node name="lower_leg_R" type="Sprite2D" parent="sprite/torso/upper_leg_R" unique_id=729839798]
+[node name="lower_leg_R" type="Sprite2D" parent="CollisionPolygon2D/sprite/torso/upper_leg_R" unique_id=729839798]
 z_index = -1
 position = Vector2(-24.634245, 110.71224)
 rotation = -0.15707964
@@ -2289,20 +2323,24 @@ texture = ExtResource("7_x1sy7")
 region_enabled = true
 region_rect = Rect2(15.107162, 320.64725, 98.946106, 186.77176)
 
-[node name="upper_leg_L" type="Sprite2D" parent="sprite/torso" unique_id=415672800]
+[node name="upper_leg_L" type="Sprite2D" parent="CollisionPolygon2D/sprite/torso" unique_id=415672800]
 z_index = -3
 position = Vector2(38.705288, 113.030525)
 texture = ExtResource("7_x1sy7")
 region_enabled = true
 region_rect = Rect2(151.6848, 186.76729, 121.079666, 136.60268)
 
-[node name="lower_leg_L" type="Sprite2D" parent="sprite/torso/upper_leg_L" unique_id=817665879]
+[node name="lower_leg_L" type="Sprite2D" parent="CollisionPolygon2D/sprite/torso/upper_leg_L" unique_id=817665879]
 z_index = -2
 position = Vector2(27.037132, 100.42564)
 rotation = 0.064577185
 texture = ExtResource("7_x1sy7")
 region_enabled = true
 region_rect = Rect2(123.314514, 325.76318, 136.68976, 167.7489)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=160804102]
+unique_name_in_owner = true
+libraries/ = SubResource("AnimationLibrary_0m7cd")
 
 [node name="ground_check" type="RayCast2D" parent="." unique_id=245394447]
 unique_name_in_owner = true
@@ -2314,19 +2352,3 @@ unique_name_in_owner = true
 process_callback = 0
 wait_time = 0.3
 one_shot = true
-
-[node name="GroundState" type="Node2D" parent="." unique_id=1141125736]
-unique_name_in_owner = true
-script = ExtResource("8_sm1rv")
-
-[node name="AirState" type="Node2D" parent="." unique_id=949493251]
-unique_name_in_owner = true
-script = ExtResource("9_qi5as")
-
-[node name="JumpState" type="Node2D" parent="." unique_id=120444797]
-unique_name_in_owner = true
-script = ExtResource("10_2hyy3")
-
-[node name="PunchState" type="Node2D" parent="." unique_id=1857172629]
-unique_name_in_owner = true
-script = ExtResource("11_irmqu")

@@ -2,7 +2,7 @@ extends State
 
 @export var SPEED := 550.0
 @export var MIN_SPEED := 200.0
-@export var JUMP_HEIGHT := 330
+@export var JUMP_HEIGHT := 165
 @export var ACCELERATION_LERP := 5.0
 
 const ON_GROUND_MARGIN := 5.0
@@ -10,6 +10,8 @@ const MANTLING_SLERP := 15.0
 
 const IDLE : StringName = "idle"
 const WALK : StringName = "walk"
+
+@onready var PUNCH_STATE : Node2D = %PunchState
 
 @onready var JUMP_IMPULSE : float = %AirState.calculate_jump_impulse(JUMP_HEIGHT)
 
@@ -23,16 +25,17 @@ func apply(delta: float) -> void:
 		chtr.COYOTE_TIMER.start()
 		return
 	
+	#print("ground")
+	apply_movement(delta)
+	
 	if chtr.jump_requested:
 		chtr.jump(JUMP_IMPULSE)
 		return
 		
 	if chtr.attack_requested:
-		chtr.enter(chtr.PUNCH_STATE)
+		chtr.enter(PUNCH_STATE)
 		return
 	
-	#print("ground")
-	apply_movement(delta)
 	apply_animation(chtr.velocity)
 	
 
@@ -44,7 +47,7 @@ func apply_movement(delta:float)->void:
 	
 	if velocity.x * direction.x < MIN_SPEED:
 		velocity.x = direction.x * MIN_SPEED
-	acceleration.x = Character.const_lerp(velocity.x, SPEED * direction.x, ACCELERATION_LERP * delta) - velocity.x
+	acceleration.x = Character.caculate_lerp_offset(velocity.x, SPEED * direction.x, ACCELERATION_LERP * delta)
 	
 	var dist : Vector2 = chtr.ground_distance()
 	if absf(dist.y) > ON_GROUND_MARGIN:
@@ -60,11 +63,8 @@ func apply_movement(delta:float)->void:
 
 func apply_animation(velocity:Vector2)->void:
 	
-	var flip : float = sign(velocity.x) if velocity.x != 0.0 else chtr.sprite.scale.x
-	chtr.sprite.scale.x = flip
-	
-	# NOTE: flipping collision using scale might be bad for physics
-	chtr.collision.scale.x = flip
+	if velocity.x != 0.0:
+		chtr.flipped = velocity.x < 0.0	
 	
 	var walk_blend := absf(velocity.x) / SPEED
 	if walk_blend < 0.2:

@@ -33,8 +33,16 @@ func gatherInput() -> void:
 	player.stick_direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 
 func _on_stage_exit(body: Node2D) -> void:
-	if is_instance_of(body,Character) and immediate_respawn:
+	if body is Character and immediate_respawn:
 		# TODO : clear all statuses, add some invincibility frames
-		player.velocity = Vector2.ZERO
-		player.enter(player.GROUND_STATE)
-		player.teleport(respawn_point.position)
+		body.velocity = Vector2.ZERO
+		body.enter(body.GROUND_STATE)
+		body.teleport(respawn_point.position)
+
+
+func _on_timer_timeout() -> void:
+	print("char2 jump")
+	$Character2.jump_requested = true
+	await get_tree().physics_frame
+	await get_tree().physics_frame
+	$Character2.jump_requested = false
