@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://x362jrn3xugr" path="res://scripts/character.gd" id="1_wdpcj"]
 [ext_resource type="PackedScene" uid="uid://b1pmu24ntq2or" path="res://scenes/dmg_area_2d.tscn" id="6_2cgup"]
+[ext_resource type="Script" uid="uid://cq1rxcpmuegf1" path="res://scripts/air_kick_state.gd" id="7_a5ia6"]
 [ext_resource type="Texture2D" uid="uid://bbp0ygwq1u3i3" path="res://assets/character_cutout_final.png" id="7_x1sy7"]
 [ext_resource type="Script" uid="uid://bser4q5e3j6kl" path="res://scripts/ground_state.gd" id="8_sm1rv"]
 [ext_resource type="Script" uid="uid://pdkor25hevti" path="res://scripts/air_state.gd" id="9_qi5as"]
@@ -358,6 +359,18 @@ tracks/28/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/29/type = "value"
+tracks/29/imported = false
+tracks/29/enabled = true
+tracks/29/path = NodePath("CollisionPolygon2D/sprite/torso/upper_leg_R:scale")
+tracks/29/interp = 1
+tracks/29/loop_wrap = true
+tracks/29/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_2hyy3"]
 resource_name = "airborne"
@@ -650,6 +663,327 @@ tracks/23/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(4, -10.999999), Vector2(4, -10.999999)]
+}
+
+[sub_resource type="Animation" id="Animation_2cgup"]
+resource_name = "airkick"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollisionPolygon2D/sprite/torso/head:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(9.970117, -91.286644), Vector2(9.970117, -91.286644)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionPolygon2D/sprite/torso/head:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.4560715, 0.22784369]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CollisionPolygon2D/sprite/torso/upper_arm_L:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.1, 0.3, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(77.65871, -33.100708), Vector2(71.813866, -24.617764), Vector2(71.813866, -24.617764), Vector2(77.65871, -33.100708)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CollisionPolygon2D/sprite/torso/upper_arm_L:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.1, 0.3, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [-0.5896692, -1.4208643, -1.4208643, -0.5896692]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("CollisionPolygon2D/sprite/torso/upper_arm_L/lower_arm_L:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.1, 0.3, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(30.168024, 90.33375), Vector2(51.640087, 27.19743), Vector2(51.640087, 27.19743), Vector2(30.168024, 90.33375)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("CollisionPolygon2D/sprite/torso/upper_arm_L/lower_arm_L:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.1, 0.3, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.48795915, -1.4504699, -1.4504699, 0.48795915]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("CollisionPolygon2D/sprite/torso/upper_arm_R:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0.3, 0.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-85.09189, -41.307533), Vector2(-85.09189, -41.307533)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("CollisionPolygon2D/sprite/torso/upper_arm_R:rotation")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0.1, 0.3, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.9535615, 1.6838187, 1.6838187, 0.7102121]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("CollisionPolygon2D/sprite/torso/upper_arm_R/lower_arm_R:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0.1, 0.3, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(16.293324, 76.892166), Vector2(23.23024, 74.27849), Vector2(23.23024, 74.27849), Vector2(16.293324, 76.892166)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("CollisionPolygon2D/sprite/torso/upper_arm_R/lower_arm_R:rotation")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0.1, 0.3, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [-0.0022096932, -0.08112949, -0.08112949, -0.0022096932]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("CollisionPolygon2D/sprite/torso/upper_leg_R:position")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0.1, 0.3, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(30.068941, 89.04219), Vector2(-1.8371029, 119.98595), Vector2(-1.8371029, 119.98595), Vector2(12.88434, 91.63655)]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("CollisionPolygon2D/sprite/torso/upper_leg_R:rotation")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0.1, 0.3, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [-1.3306489, -0.31461447, -0.31461447, -0.828105]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("CollisionPolygon2D/sprite/torso/upper_leg_R/lower_leg_R:position")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0.1, 0.3, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-99.29946, 12.436159), Vector2(-39.487198, 113.52801), Vector2(-39.487198, 113.52801), Vector2(-97.25464, 36.849197)]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("CollisionPolygon2D/sprite/torso/upper_leg_R/lower_leg_R:rotation")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0.1, 0.3, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [1.6927868, 0.0337081, 0.0337081, 1.3741382]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("CollisionPolygon2D/sprite/torso/upper_leg_L:position")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0.1, 0.3, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(84.74194, 64.16197), Vector2(72.70235, 103.98232), Vector2(72.70235, 103.98232), Vector2(69.84554, 103.93858)]
+}
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("CollisionPolygon2D/sprite/torso/upper_leg_L:rotation")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(0.1, 0.3, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [-0.8496816, -0.58594155, -0.58594155, -0.47327232]
+}
+tracks/16/type = "value"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("CollisionPolygon2D/sprite/torso/upper_leg_L/lower_leg_L:position")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
+"times": PackedFloat32Array(0.1, 0.3, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-55.96988, 66.47102), Vector2(-48.213444, 50.081112), Vector2(-48.213444, 50.081112), Vector2(-45.500443, 91.267235)]
+}
+tracks/17/type = "value"
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/path = NodePath("CollisionPolygon2D/sprite/torso/upper_leg_L/lower_leg_L:rotation")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/keys = {
+"times": PackedFloat32Array(0.1, 0.3, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [1.8583815, 2.1122434, 2.1122434, 1.5911484]
+}
+tracks/18/type = "value"
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/path = NodePath("CollisionPolygon2D/sprite/torso:rotation")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+tracks/19/type = "value"
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/path = NodePath("CollisionPolygon2D/sprite/torso:region_rect")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/keys = {
+"times": PackedFloat32Array(0.10000002),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(62.29088, 7.5, 147.75868, 178.02414)]
+}
+tracks/20/type = "value"
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/path = NodePath("CollisionPolygon2D/sprite/torso/upper_arm_R/lower_arm_R:scale")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+tracks/21/type = "value"
+tracks/21/imported = false
+tracks/21/enabled = true
+tracks/21/path = NodePath("CollisionPolygon2D/sprite/torso/upper_arm_L/lower_arm_L:scale")
+tracks/21/interp = 1
+tracks/21/loop_wrap = true
+tracks/21/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+tracks/22/type = "value"
+tracks/22/imported = false
+tracks/22/enabled = true
+tracks/22/path = NodePath("CollisionPolygon2D/sprite/torso/upper_arm_R:scale")
+tracks/22/interp = 1
+tracks/22/loop_wrap = true
+tracks/22/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+tracks/23/type = "value"
+tracks/23/imported = false
+tracks/23/enabled = true
+tracks/23/path = NodePath("CollisionPolygon2D/sprite/torso:position")
+tracks/23/interp = 1
+tracks/23/loop_wrap = true
+tracks/23/keys = {
+"times": PackedFloat32Array(0.10000002),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(4, -10.999999)]
+}
+tracks/24/type = "value"
+tracks/24/imported = false
+tracks/24/enabled = true
+tracks/24/path = NodePath("CollisionPolygon2D/sprite/torso/upper_leg_R:scale")
+tracks/24/interp = 1
+tracks/24/loop_wrap = true
+tracks/24/keys = {
+"times": PackedFloat32Array(0.1, 0.3, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.1, 1.25), Vector2(1.1, 1.25), Vector2(1, 1)]
+}
+tracks/25/type = "method"
+tracks/25/imported = false
+tracks/25/enabled = true
+tracks/25/path = NodePath("CollisionPolygon2D/AirKickState")
+tracks/25/interp = 1
+tracks/25/loop_wrap = true
+tracks/25/keys = {
+"times": PackedFloat32Array(0.3, 1),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"start_moving"
+}, {
+"args": [],
+"method": &"end"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_1qy1k"]
@@ -2223,6 +2557,7 @@ tracks/24/keys = {
 _data = {
 &"RESET": SubResource("Animation_0m7cd"),
 &"airborne": SubResource("Animation_2hyy3"),
+&"airkick": SubResource("Animation_2cgup"),
 &"block": SubResource("Animation_1qy1k"),
 &"idle": SubResource("Animation_2ihbs"),
 &"jump": SubResource("Animation_0dpix"),
@@ -2251,10 +2586,15 @@ script = ExtResource("10_2hyy3")
 
 [node name="PunchState" type="Node2D" parent="CollisionPolygon2D" unique_id=1857172629]
 unique_name_in_owner = true
+visible = false
 script = ExtResource("11_irmqu")
 
 [node name="dmgArea2D" parent="CollisionPolygon2D/PunchState" unique_id=2075851471 instance=ExtResource("6_2cgup")]
 position = Vector2(60, -15)
+
+[node name="AirKickState" type="Node2D" parent="CollisionPolygon2D" unique_id=91813150]
+unique_name_in_owner = true
+script = ExtResource("7_a5ia6")
 
 [node name="sprite" type="Node2D" parent="CollisionPolygon2D" unique_id=1239840786]
 unique_name_in_owner = true
@@ -2309,7 +2649,6 @@ region_rect = Rect2(346.0835, 385.33884, 147.10748, 113.223145)
 z_index = -1
 position = Vector2(-26.666664, 110)
 rotation = 0.18675023
-scale = Vector2(0.9845356, 1)
 texture = ExtResource("7_x1sy7")
 region_enabled = true
 region_rect = Rect2(16.459671, 180.87715, 104.935684, 141.57005)

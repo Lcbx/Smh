@@ -37,11 +37,15 @@ func _physics_process(delta: float) -> void:
 # framerate independent lerp
 # use as a = const_lerp(a, b, speed * dt) each frame
 # see https://www.youtube.com/watch?v=LSNQuFEDOyQ
-static func const_lerp(a, b, amount:float):
+static func const_lerp2(a : Vector2, b : Vector2, amount:float) -> Vector2:
 	return lerp(a, b, 1-exp(-amount))
+
 static func const_lerpf(a:float, b:float, amount:float)->float:
 	return lerpf(a, b, 1-exp(-amount))
 	
+static func caculate_lerp_offset2(from:Vector2, to:Vector2, amount:float) -> Vector2:
+	return const_lerp2(from, to, amount) - from
+
 static func caculate_lerp_offset(from:float, to:float, amount:float) -> float:
 	return const_lerpf(from, to, amount) - from
 	

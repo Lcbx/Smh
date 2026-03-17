@@ -9,7 +9,7 @@ extends Node2D
 func _ready() -> void:
 	player.input.connect(gatherInput)
 	stageArea.body_exited.connect(_on_stage_exit)
-	print('immediate_respawn ', immediate_respawn)
+	#print('immediate_respawn ', immediate_respawn)
 
 #TODO: implement input buffer in Character
 func _input(event: InputEvent) -> void:
@@ -41,7 +41,7 @@ func _on_stage_exit(body: Node2D) -> void:
 
 
 func _on_timer_timeout() -> void:
-	print("char2 jump")
+	#print("char2 jump")
 	$Character2.jump_requested = true
 	await get_tree().physics_frame
 	await get_tree().physics_frame

@@ -54,7 +54,7 @@ func apply_movement(delta:float)->void:
 		# NOTE: target_pos is more or less constant throughout frames
 		var target_pos := chtr.position - dist
 		#print("target_pos", target_pos)
-		var traveled : Vector2 = Character.const_lerp( chtr.position, target_pos, MANTLING_SLERP * delta) - chtr.position
+		var traveled : Vector2 = Character.const_lerp2( chtr.position, target_pos, MANTLING_SLERP * delta) - chtr.position
 		chtr.move_and_collide(traveled)
 	
 	velocity.y = 0.0

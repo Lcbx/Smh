@@ -14,6 +14,8 @@ var MAX_FALL_SPEED : float
 
 const AIRBORNE : StringName = "airborne"
 
+@onready var KICK_STATE : State = %AirKickState
+
 #/* calculate secondary constants */
 func _enter_tree() -> void:
 	#jump_air_time = target_jump_max_distance / top_speeds[Character.MovementEnum.run]
@@ -42,6 +44,11 @@ func apply(delta: float) -> void:
 	
 	if chtr.jumps > 0 and chtr.jump_requested:
 		chtr.jump(JUMP_IMPULSE)
+		return
+	
+	# TODO: check stick_direction
+	if chtr.attack_requested:
+		chtr.enter(KICK_STATE)
 		return
 	
 	apply_movement(delta)
