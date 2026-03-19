@@ -9,6 +9,14 @@
 [ext_resource type="Script" uid="uid://b6es8sloopvsk" path="res://scripts/jump_state.gd" id="10_2hyy3"]
 [ext_resource type="Script" uid="uid://c31v5g0erup81" path="res://scripts/punch_state.gd" id="11_irmqu"]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_a5ia6"]
+radius = 17.0
+height = 44.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0dpix"]
+radius = 20.0
+height = 50.0
+
 [sub_resource type="Animation" id="Animation_0m7cd"]
 length = 0.001
 tracks/0/type = "value"
@@ -370,6 +378,18 @@ tracks/29/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(1, 1)]
+}
+tracks/30/type = "value"
+tracks/30/imported = false
+tracks/30/enabled = true
+tracks/30/path = NodePath("ground_check:collision_mask")
+tracks/30/interp = 1
+tracks/30/loop_wrap = true
+tracks/30/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
 }
 
 [sub_resource type="Animation" id="Animation_2hyy3"]
@@ -984,6 +1004,18 @@ tracks/25/keys = {
 "args": [],
 "method": &"end"
 }]
+}
+tracks/26/type = "value"
+tracks/26/imported = false
+tracks/26/enabled = true
+tracks/26/path = NodePath("ground_check:collision_mask")
+tracks/26/interp = 1
+tracks/26/loop_wrap = true
+tracks/26/keys = {
+"times": PackedFloat32Array(0.1, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [1, 3]
 }
 
 [sub_resource type="Animation" id="Animation_1qy1k"]
@@ -2567,6 +2599,8 @@ _data = {
 }
 
 [node name="Character" type="CharacterBody2D" unique_id=610269851]
+collision_layer = 2
+collision_mask = 3
 script = ExtResource("1_wdpcj")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=1393552245]
@@ -2591,6 +2625,25 @@ script = ExtResource("11_irmqu")
 
 [node name="dmgArea2D" parent="CollisionPolygon2D/PunchState" unique_id=2075851471 instance=ExtResource("6_2cgup")]
 position = Vector2(60, -15)
+collision_mask = 2
+
+[node name="start" type="CollisionShape2D" parent="CollisionPolygon2D/PunchState/dmgArea2D" unique_id=893044391]
+position = Vector2(-37, 9)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_a5ia6")
+disabled = true
+
+[node name="middle" type="CollisionShape2D" parent="CollisionPolygon2D/PunchState/dmgArea2D" unique_id=1575352179]
+position = Vector2(-8, 4)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_0dpix")
+disabled = true
+
+[node name="end" type="CollisionShape2D" parent="CollisionPolygon2D/PunchState/dmgArea2D" unique_id=1095294294]
+position = Vector2(28, -7)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_0dpix")
+disabled = true
 
 [node name="AirKickState" type="Node2D" parent="CollisionPolygon2D" unique_id=91813150]
 unique_name_in_owner = true
@@ -2684,7 +2737,8 @@ libraries/ = SubResource("AnimationLibrary_0m7cd")
 [node name="ground_check" type="RayCast2D" parent="." unique_id=245394447]
 unique_name_in_owner = true
 position = Vector2(0, 30)
-target_position = Vector2(0, 63)
+target_position = Vector2(0, 60)
+collision_mask = 3
 
 [node name="CoyoteTime" type="Timer" parent="." unique_id=1059573528]
 unique_name_in_owner = true

@@ -25,16 +25,18 @@ func enter(..._args)->void:
 	#start = Time.get_ticks_msec()
 	chtr.animate(AIRKICK, 2.0, 0.0)
 	
-	direction = chtr.stick_direction
+	var dir := chtr.stick_direction
 	
 	# align character to direction
-	if direction.x != 0:
-		chtr.flipped = direction.x < 0.0
-	direction.x *= 0.7
+	if dir.x != 0:
+		chtr.flipped = dir.x < 0.0
+	
+	direction.x = (-1.0 if chtr.flipped else 1.0) * clampf(absf(dir.x), 0.15, 0.4)
 	direction.y = 1
 	direction = direction.normalized()
 	#print("direction ", direction)
-	var angle := -deg_to_rad(direction.x * 40)
+	
+	var angle := -deg_to_rad(direction.x * 45)
 	chtr.collision.rotation = angle
 
 func start_moving():
@@ -47,9 +49,13 @@ func end()->void:
 	#print("elapsed ", Time.get_ticks_msec() - start)
 
 func apply(_delta: float)->void:
+	if chtr.is_grounded(): interrupt()
+		
 	var speed := chtr.velocity
 	#var offset := (#Vector2.ZERO if move else
 	#Character.caculate_lerp_offset2(speed, sign(chtr.stick_direction) * min_speed, friction_lerp*delta))
 	#chtr.apply_movement(speed, offset, min_speed)
 	chtr.apply_movement(speed, Vector2.ZERO, 0.0)
-	
+
+func interrupt()->void:
+	chtr.animation_player.advance( (chtr.animation_player.current_animation_length - chtr.animation_player.current_animation_position) * 0.8 )

@@ -30,9 +30,14 @@ func _input(event: InputEvent) -> void:
 # this is for when we use sticks / implement bots
 # (though for bots we might not want to think every frame)
 func gatherInput() -> void:
-	player.stick_direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+	# unnormalized x/y direction
+	var dir := Vector2.ZERO
+	dir.x = Input.get_axis("ui_left", "ui_right")
+	dir.y = Input.get_axis("ui_up", "ui_down")
+	player.stick_direction = dir
 
 func _on_stage_exit(body: Node2D) -> void:
+	#print("exit ", body.name)
 	if body is Character and immediate_respawn:
 		# TODO : clear all statuses, add some invincibility frames
 		body.velocity = Vector2.ZERO

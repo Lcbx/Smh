@@ -100,7 +100,7 @@ func teleport(tp_position : Vector2)->void:
 
 var flipped : bool :
 	get():
-		return sprite.scale.x > 0.0
+		return flipped
 	set(value):
 		flipped = value
 		## NOTE: flipping collision using scale might be bad for physics

@@ -108,6 +108,8 @@ polygon = PackedVector2Array(325.67175, 722.4176, 1275.1536, 722.4178, 1281.01, 
 position = Vector2(595, 615)
 
 [node name="StageArea" type="Area2D" parent="." unique_id=1953250869]
+collision_layer = 0
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StageArea" unique_id=1941794507]
 position = Vector2(800, 540)
