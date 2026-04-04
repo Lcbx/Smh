@@ -6,9 +6,9 @@ extends CharacterBody2D
 @onready var sprite: Node2D = %sprite
 @onready var collision: CollisionPolygon2D = $CollisionPolygon2D
 
-@onready var GROUND_STATE : Node2D = %GroundState
-@onready var AIR_STATE : Node2D = %AirState
-@onready var JUMP_STATE : Node2D = %JumpState
+@onready var GROUND_STATE : State = %GroundState
+@onready var AIR_STATE : State = %AirState
+@onready var JUMP_STATE : State = %JumpState
 @onready var COYOTE_TIMER : Timer = %CoyoteTime
 
 @export var MAX_JUMPS := 2
@@ -40,22 +40,20 @@ func _physics_process(delta: float) -> void:
 static func const_lerp2(a : Vector2, b : Vector2, amount:float) -> Vector2:
 	return lerp(a, b, 1-exp(-amount))
 
-static func const_lerpf(a:float, b:float, amount:float)->float:
+static func const_lerp(a:float, b:float, amount:float)->float:
 	return lerpf(a, b, 1-exp(-amount))
 	
 static func caculate_lerp_offset2(from:Vector2, to:Vector2, amount:float) -> Vector2:
 	return const_lerp2(from, to, amount) - from
 
 static func caculate_lerp_offset(from:float, to:float, amount:float) -> float:
-	return const_lerpf(from, to, amount) - from
+	return const_lerp(from, to, amount) - from
 	
 func is_grounded() -> bool:
 	return ground_check.is_colliding()
 
-func ground_distance() -> Vector2:
-	return (ground_check.global_position + ground_check.target_position - ground_check.get_collision_point())
-
 func apply_movement(speed : Vector2, acceleration : Vector2, max_horizontal_speed:float) -> void:
+	
 	# half acceleration before + after movement makes for a better integration of the force
 	var half_acceleration := acceleration * 0.5
 	speed += impulse
@@ -64,24 +62,25 @@ func apply_movement(speed : Vector2, acceleration : Vector2, max_horizontal_spee
 	speed.x = move_toward(speed.x, sign(half_acceleration.x) * max_horizontal_speed, abs(half_acceleration.x))
 	velocity = speed
 	
-	#print("accleration ", half_acceleration)
-	#print("velocity ", velocity)
-	#print("position ", position)
+	#print(name, " accleration ", half_acceleration)
+	#print(name, " velocity ", velocity)
+	#print(name, " position ", position)
 	move_and_slide()
 	velocity += half_acceleration
 
-func animate(anim_name:StringName, strength:float=1.0, blend_time:float = 0.2)->void:
-	var speed = max(0.4, strength)
-	#if anim_name != animation_player.current_animation:
-	#	print(self.name, " play ", anim_name, "/", blend_time, "/", speed)
+func animate(anim_name:StringName, time:float=1.0, blend_time:float = 0.2)->void:
+	var speed = 1.0 / max(time, 0.1) # speed is 1.0 / time if anim duration is 1. second
+	if anim_name != animation_player.current_animation:
+		print(self.name, " play ", anim_name, "/", blend_time, "/", speed)
 	animation_player.play(anim_name, blend_time, speed)
-	animation_player.advance(0)
+	#animation_player.advance(0)
 
 func enter(state : State, ...args)->void:
+	print(name, ' ', state.name)
 	self._state = state
 	_state.enter.callv(args)
-	if Engine.is_in_physics_frame():
-		_state.apply(1.0/float(Engine.physics_ticks_per_second))
+	#if Engine.is_in_physics_frame():
+	#	_state.apply(1.0/float(Engine.physics_ticks_per_second))
 
 # TODO: check the command buffer and apply it in there ?
 func check_state()->bool:
@@ -115,12 +114,13 @@ var health := 100.0
 # impulse from damage, applied in movement
 var impulse := Vector2.ZERO
 
-# TODO :
-# * add hitstun state / calculate hitstun duration
-# * pass damage to state for hyperarmor application (or just set hyperarmor as character attribute)
-# * add hard stun when health dips under 0
-func receive_damage(power:float, dir:Vector2)->void:
-	health -= power
-	var impulse_value = (200.0 - health) * 0.1 * power * power
-	impulse += dir * impulse_value
-	#print('health ', health, ' impulse ', impulse)
+const ON_GROUND_MARGIN := 5.0
+const MANTLING_SLERP := 15.0
+func ground_repulsion(delta:float)->void:
+	var ground_dist : Vector2 = ground_check.global_position + ground_check.target_position - ground_check.get_collision_point()
+	if absf(ground_dist.y) > ON_GROUND_MARGIN:
+		# NOTE: target_pos is more or less constant throughout frames
+		var target_pos := position - ground_dist
+		#print("target_pos", target_pos)
+		var traveled : Vector2 = caculate_lerp_offset2( position, target_pos, MANTLING_SLERP * delta)
+		move_and_collide(traveled)

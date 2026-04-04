@@ -1,8 +1,10 @@
 extends State
 
-@export var friction_lerp : float = 2.0
-#@export var min_speed : float = 200.0
-@export var cruise_speed : float = 1200.0
+@export var lerp_strength : float = 7.0
+@export var start_speed : float = 300.0
+@export var cruise_speed : float = 1500.0
+@export var ending_lag : float = 0.05
+@export var time = 0.5
 
 const AIRKICK : StringName = "airkick"
 
@@ -14,16 +16,18 @@ const AIRKICK : StringName = "airkick"
 #@onready var dmgArea:DmgArea = $dmgArea2D
 
 var direction : Vector2
-var move := false
+var move: bool
 
 func _ready() -> void:
 	#dmgArea.register(chtr)
-	move = false
+	pass
 
 #var start : int
 func enter(..._args)->void:
 	#start = Time.get_ticks_msec()
-	chtr.animate(AIRKICK, 2.0, 0.0)
+	
+	move = false
+	chtr.animate(AIRKICK, time, 0.0)
 	
 	var dir := chtr.stick_direction
 	
@@ -31,16 +35,17 @@ func enter(..._args)->void:
 	if dir.x != 0:
 		chtr.flipped = dir.x < 0.0
 	
-	direction.x = (-1.0 if chtr.flipped else 1.0) * clampf(absf(dir.x), 0.15, 0.4)
+	direction.x = (-1.0 if chtr.flipped else 1.0) * clampf(absf(dir.x), 0.15, 0.7)
 	direction.y = 1
 	direction = direction.normalized()
 	#print("direction ", direction)
 	
-	var angle := -deg_to_rad(direction.x * 45)
+	var angle := -deg_to_rad(dir.x * 23.0)
 	chtr.collision.rotation = angle
 
 func start_moving():
-	chtr.impulse = cruise_speed * direction
+	chtr.impulse = start_speed * direction
+	#chtr.velocity = start_speed * direction
 	move = true
 
 func end()->void:
@@ -48,14 +53,22 @@ func end()->void:
 	chtr.check_state()
 	#print("elapsed ", Time.get_ticks_msec() - start)
 
-func apply(_delta: float)->void:
+func apply(delta: float)->void:
 	if chtr.is_grounded(): interrupt()
-		
+	
 	var speed := chtr.velocity
-	#var offset := (#Vector2.ZERO if move else
-	#Character.caculate_lerp_offset2(speed, sign(chtr.stick_direction) * min_speed, friction_lerp*delta))
-	#chtr.apply_movement(speed, offset, min_speed)
-	chtr.apply_movement(speed, Vector2.ZERO, 0.0)
+	var offset := (
+		Character.caculate_lerp_offset2(speed,
+		cruise_speed * direction
+		#if move else Vector2.ZERO
+		, lerp_strength*delta)
+		if move else Vector2.ZERO
+	)
+	#print("speed ", speed)
+	chtr.apply_movement(speed, offset, 0.0)
+	#chtr.apply_movement(speed, Vector2.ZERO, 0.0)
 
 func interrupt()->void:
-	chtr.animation_player.advance( (chtr.animation_player.current_animation_length - chtr.animation_player.current_animation_position) * 0.8 )
+	var remaining := chtr.animation_player.current_animation_length - chtr.animation_player.current_animation_position
+	if remaining > ending_lag:
+		chtr.animation_player.advance( remaining - ending_lag )

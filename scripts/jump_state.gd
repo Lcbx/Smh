@@ -2,7 +2,7 @@ extends State
 
 const JUMP : StringName = "jump"
 
-@export var anim_speed := 3.0
+@export var time := 0.3
 
 var move := false
 var strength:float
@@ -14,7 +14,7 @@ func enter(...args) -> void:
 	chtr.jumps -= 1
 	move = false
 	chtr.COYOTE_TIMER.stop()
-	chtr.animate(JUMP,anim_speed)
+	chtr.animate(JUMP, time)
 
 # not a fan of this compromise
 func start_moving():

@@ -6,7 +6,7 @@ class_name DmgArea
 	set(value):
 		power = value
 		update_line()
-@export var angle : float = -5.0 :
+@export var angle : float = -10.0 :
 	set(value):
 		angle = value
 		update_line()
@@ -21,13 +21,11 @@ func register(chtr:Character, ...args)->void:
 	_chtr = chtr
 	self.body_entered.connect(args[0] if args else handle)
 
-func calculate_launch():
-	return Vector2(1, 0.0).rotated(deg_to_rad(angle)) * _chtr.collision.scale
-
 func handle(body:CollisionObject2D)->void:
 	if body is Character and body != _chtr:
 		#print('hi', body.name, " from ", _chtr.name)
-		body.receive_damage(power, calculate_launch())
+		var impulse_dir = Vector2(1, 0.0).rotated(deg_to_rad(angle)) * _chtr.collision.scale
+		body._state.receive_damage(power, impulse_dir)
 		temp_disable.call_deferred()
 
 func temp_disable()->void:

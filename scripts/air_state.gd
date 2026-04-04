@@ -39,9 +39,6 @@ func apply(delta: float) -> void:
 	#print("air")
 	apply_animation(chtr.velocity)
 	
-	#if chtr.attack_requested:
-	#	chtr.velocity = Vector2.RIGHT.rotated(deg_to_rad(45)) * 1600.0
-	
 	if chtr.jumps > 0 and chtr.jump_requested:
 		chtr.jump(JUMP_IMPULSE)
 		return
@@ -54,16 +51,6 @@ func apply(delta: float) -> void:
 	apply_movement(delta)
 
 func apply_movement(delta: float)->void:
-	
-	# restores a jump on the first wall collision of an aerial maneuver
-	if (chtr.unused_wall_jump
-		and chtr.jumps < chtr.MAX_JUMPS
-		and chtr.get_slide_collision_count() > 0
-		and abs(chtr.get_last_slide_collision().get_normal().dot(Vector2.RIGHT)) > 0.5
-	):
-		#print("restoring jump")
-		chtr.unused_wall_jump = false
-		chtr.jumps += 1
 	
 	var velocity := chtr.velocity
 	var acceleration := Vector2.ZERO
@@ -78,6 +65,16 @@ func apply_movement(delta: float)->void:
 	
 	velocity.y = min(MAX_FALL_SPEED, velocity.y)
 	chtr.apply_movement(velocity, acceleration, SPEED)
+	
+	# restores a jump on the first wall collision of an aerial maneuver
+	if (chtr.unused_wall_jump
+		and chtr.jumps < chtr.MAX_JUMPS
+		and chtr.get_slide_collision_count() > 0
+		and abs(chtr.get_last_slide_collision().get_normal().dot(Vector2.RIGHT)) > 0.5
+	):
+		#print("restoring jump")
+		chtr.unused_wall_jump = false
+		chtr.jumps += 1
 
 func apply_animation(velocity:Vector2)->void:
 	if velocity.x != 0.0:
