@@ -1,5 +1,5 @@
 class_name Character
-extends CharacterBody2D
+extends PhysicsBody2D
 
 @onready var animation_player: AnimationPlayer = %AnimationPlayer
 @onready var ground_check: RayCast2D = %ground_check
@@ -25,6 +25,9 @@ var stick_direction := Vector2.ZERO
 var jump_requested := false
 var attack_requested := false
 var special_requested := false
+var velocity := Vector2.ZERO
+
+var last_collision : KinematicCollision2D = null
 
 #TODO: create abstract class for State
 @onready var _state = AIR_STATE
@@ -52,21 +55,38 @@ static func caculate_lerp_offset(from:float, to:float, amount:float) -> float:
 func is_grounded() -> bool:
 	return ground_check.is_colliding()
 
-func apply_movement(speed : Vector2, acceleration : Vector2, max_horizontal_speed:float) -> void:
+func apply_movement(speed : Vector2, acceleration : Vector2, delta:float, slide_else_bounce:bool=true) -> void:
+	
+	# apply last impulse
+	speed += impulse
+	impulse = Vector2.ZERO
 	
 	# half acceleration before + after movement makes for a better integration of the force
 	var half_acceleration := acceleration * 0.5
-	speed += impulse
-	impulse = Vector2.ZERO
-	speed.y += half_acceleration.y
-	speed.x = move_toward(speed.x, sign(half_acceleration.x) * max_horizontal_speed, abs(half_acceleration.x))
-	velocity = speed
+	speed += half_acceleration
 	
 	#print(name, " accleration ", half_acceleration)
 	#print(name, " velocity ", velocity)
 	#print(name, " position ", position)
-	move_and_slide()
-	velocity += half_acceleration
+	
+	# simple move_and_slide implementation 
+	var move := speed * delta
+	last_collision = move_and_collide(move)
+	if last_collision:
+		var remaining := last_collision.get_remainder()
+		var normal := last_collision.get_normal()
+		var second_move := normal * last_collision.get_depth()
+		if slide_else_bounce:
+			second_move += remaining.slide(normal)
+		else:
+			second_move += remaining.bounce(normal)
+			speed = speed.bounce(normal)
+			# try to avoid pinballing
+			speed.x *= 0.6
+			#half_acceleration = Vector2.ZERO
+		move_and_collide(second_move)
+	
+	velocity = speed + half_acceleration
 
 func animate(anim_name:StringName, time:float=1.0, blend_time:float = 0.2)->void:
 	var speed = 1.0 / max(time, 0.1) # speed is 1.0 / time if anim duration is 1. second
@@ -117,10 +137,13 @@ var impulse := Vector2.ZERO
 const ON_GROUND_MARGIN := 5.0
 const MANTLING_SLERP := 15.0
 func ground_repulsion(delta:float)->void:
+	# ! only use when grounded !
+	#if not is_grounded(): return
 	var ground_dist : Vector2 = ground_check.global_position + ground_check.target_position - ground_check.get_collision_point()
-	if absf(ground_dist.y) > ON_GROUND_MARGIN:
+	#print("ground_dist ", ground_dist)
+	if ground_dist.y > ON_GROUND_MARGIN:
+		#print("height adjustment !", ground_dist)
 		# NOTE: target_pos is more or less constant throughout frames
-		var target_pos := position - ground_dist
-		#print("target_pos", target_pos)
-		var traveled : Vector2 = caculate_lerp_offset2( position, target_pos, MANTLING_SLERP * delta)
-		move_and_collide(traveled)
+		var target_pos := position.y - ground_dist.y
+		var traveled := caculate_lerp_offset( position.y, target_pos, MANTLING_SLERP * delta)
+		move_and_collide(Vector2(0, traveled))

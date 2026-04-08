@@ -65,8 +65,7 @@ func apply(delta: float)->void:
 		if move else Vector2.ZERO
 	)
 	#print("speed ", speed)
-	chtr.apply_movement(speed, offset, 0.0)
-	#chtr.apply_movement(speed, Vector2.ZERO, 0.0)
+	chtr.apply_movement(speed, offset, delta)
 
 func interrupt()->void:
 	var remaining := chtr.animation_player.current_animation_length - chtr.animation_player.current_animation_position

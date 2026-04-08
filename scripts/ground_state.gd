@@ -49,7 +49,7 @@ func apply_movement(delta:float)->void:
 	chtr.ground_repulsion(delta)
 	
 	velocity.y = 0.0
-	chtr.apply_movement(velocity, acceleration, SPEED)
+	chtr.apply_movement(velocity, acceleration, delta)
 	
 
 func apply_animation(velocity:Vector2)->void:

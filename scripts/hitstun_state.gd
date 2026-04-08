@@ -2,6 +2,8 @@ extends State
 
 const HITSTUN : StringName = "hitstun"
 
+@export var acceleration : float = 100.0
+
 @export var friction : float = 700.0
 var duration : float
 
@@ -11,16 +13,13 @@ func enter(...args) -> void:
 	chtr.animate(HITSTUN, duration, 0.05)
 
 func apply(delta: float) -> void:
-	# TODO : bounce on surface collision (dont forget to use ground check for ground bounce)
-	
-	#var velocity = chtr.velocity
-	# !!! ground repulsion has very weird behaviour
-	#chtr.ground_repulsion(delta)
-	chtr.AIR_STATE.apply_movement(delta)
-	#chtr.apply_movement(velocity, Vector2.ZERO, 0.0)
-	#chtr.move_and_slide()
-	#print('applied ', chtr.velocity)
-
+	# TODO : bounce on floor collision (use groundcheck raycast for ground bounce)
+	var accel := chtr.stick_direction * acceleration
+	accel.y += chtr.AIR_STATE.RISING_GRAVITY
+	accel *= delta
+	chtr.apply_movement(chtr.velocity, accel, delta, false)
+	if chtr.is_grounded():
+		chtr.ground_repulsion(delta)
 
 func end()->void:
 	#print('end speed ', chtr.velocity)

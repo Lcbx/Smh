@@ -64,13 +64,13 @@ func apply_movement(delta: float)->void:
 	acceleration.y = gravity * (1.0 + floatiness_modifier * direction.y) * delta
 	
 	velocity.y = min(MAX_FALL_SPEED, velocity.y)
-	chtr.apply_movement(velocity, acceleration, SPEED)
+	chtr.apply_movement(velocity, acceleration, delta)
 	
 	# restores a jump on the first wall collision of an aerial maneuver
-	if (chtr.unused_wall_jump
+	if (chtr.last_collision
+		and chtr.unused_wall_jump
 		and chtr.jumps < chtr.MAX_JUMPS
-		and chtr.get_slide_collision_count() > 0
-		and abs(chtr.get_last_slide_collision().get_normal().dot(Vector2.RIGHT)) > 0.5
+		and abs(chtr.last_collision.get_normal().dot(Vector2.RIGHT)) > 0.5
 	):
 		#print("restoring jump")
 		chtr.unused_wall_jump = false

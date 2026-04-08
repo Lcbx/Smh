@@ -11,11 +11,11 @@
 
 [sub_resource type="Resource" id="Resource_5vw27"]
 script = ExtResource("2_fbudy")
-position = Vector2(325.67175, 722.4176)
+position = Vector2(320.17172, 702.6177)
 
 [sub_resource type="Resource" id="Resource_kek77"]
 script = ExtResource("2_fbudy")
-position = Vector2(1275.1536, 722.4178)
+position = Vector2(1282.8536, 703.71783)
 
 [sub_resource type="Resource" id="Resource_4c57u"]
 script = ExtResource("2_fbudy")
@@ -27,7 +27,7 @@ position = Vector2(321.27954, 859.4728)
 
 [sub_resource type="Resource" id="Resource_dg77c"]
 script = ExtResource("2_fbudy")
-position = Vector2(325.67175, 722.4176)
+position = Vector2(320.17172, 702.6177)
 
 [sub_resource type="Resource" id="Resource_45aep"]
 script = ExtResource("3_0m7cd")
@@ -42,19 +42,19 @@ _point_order = PackedInt32Array(0, 1, 2, 3, 4)
 _constraints = {
 Vector2i(0, 4): 15
 }
-_next_key = 6
+_next_key = 7
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_w48qg"]
 _surfaces = [{
-"aabb": AABB(321.27954, 722.4176, 0, 959.73047, 137.05518, 1e-05),
-"attribute_data": PackedByteArray("/////+pkH0C9mrQ/6mQfQL2atD//////UiAgQBGl1j9SICBAEaXWP//////IoyA/Qt7WP8ijID9C3tY///////zVIj+6mrQ//NUiP7qatD8="),
+"aabb": AABB(320.17172, 702.6177, 0, 962.6819, 156.8551, 1e-05),
+"attribute_data": PackedByteArray("/////1FbIEDx7a8/UVsgQPHtrz//////UiAgQBGl1j9SICBAEaXWP//////IoyA/Qt7WP8ijID9C3tY///////sVID+Ip68/+xUgP4inrz8="),
 "format": 34359742527,
 "index_count": 9,
 "index_data": PackedByteArray("AAABAAIAAgADAAMAAwAAAAIA"),
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
 "vertex_count": 4,
-"vertex_data": PackedByteArray("6mSfRL2aNEQAAAAAUiCgRBGlVkQAAAAAyKOgQ0LeVkQAAAAA/NWiQ7qaNEQAAAAA/////////7//////////v/////////+//////////78=")
+"vertex_data": PackedByteArray("UVugRPHtL0QAAAAAUiCgRBGlVkQAAAAAyKOgQ0LeVkQAAAAA+xWgQ4inL0QAAAAA/////////7//////////v/////////+//////////78=")
 }]
 
 [sub_resource type="Gradient" id="Gradient_vivmo"]
@@ -80,6 +80,9 @@ metadata/_custom_type_script = "uid://nc5bfedvnpgm"
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e124b"]
 size = Vector2(1600, 1080)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_101mb"]
+size = Vector2(50, 500)
+
 [node name="gameplay" type="Node2D" unique_id=1757507555]
 script = ExtResource("1_1qy1k")
 
@@ -89,7 +92,6 @@ offset_bottom = 49.0
 text = "Test"
 
 [node name="Stage" type="StaticBody2D" parent="." unique_id=1444414146]
-position = Vector2(2, -23)
 
 [node name="SS2D_Shape" type="Node2D" parent="Stage" unique_id=1480355260]
 script = ExtResource("1_cbffv")
@@ -100,14 +102,14 @@ shape_material = SubResource("Resource_tyrfw")
 collision_polygon_node_path = NodePath("../CollisionPolygon2D")
 metadata/_custom_type_script = "uid://dhdc4b8yddyej"
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Stage" unique_id=36179280]
-visible = false
-polygon = PackedVector2Array(325.67175, 722.4176, 1275.1536, 722.4178, 1281.01, 858.57916, 321.27954, 859.4728)
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Stage" unique_id=731640187]
+polygon = PackedVector2Array(320.17172, 702.6177, 1282.8536, 703.71783, 1281.01, 858.57916, 321.27954, 859.4728)
 
 [node name="Character" parent="." unique_id=610269851 instance=ExtResource("8_0m7cd")]
 position = Vector2(595, 615)
 
 [node name="StageArea" type="Area2D" parent="." unique_id=1953250869]
+visible = false
 collision_layer = 0
 collision_mask = 2
 
@@ -125,5 +127,11 @@ scale = Vector2(-1, 1)
 [node name="Timer" type="Timer" parent="." unique_id=266649587]
 wait_time = 4.0
 autostart = true
+
+[node name="wall" type="StaticBody2D" parent="." unique_id=855454260]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="wall" unique_id=1321871233]
+position = Vector2(1256, 455)
+shape = SubResource("RectangleShape2D_101mb")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
