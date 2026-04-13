@@ -69,6 +69,8 @@ func apply_movement(speed : Vector2, acceleration : Vector2, delta:float, slide_
 	#print(name, " velocity ", velocity)
 	#print(name, " position ", position)
 	
+	# NOTE: maybe we should check if collision is with other character and add a small force tos eparate them
+	
 	# simple move_and_slide implementation 
 	var move := speed * delta
 	last_collision = move_and_collide(move)

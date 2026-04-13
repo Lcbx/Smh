@@ -18,9 +18,10 @@ const AIRKICK : StringName = "airkick"
 var direction : Vector2
 var move: bool
 
+@onready var dmgArea:DmgArea = $dmgArea2D
+
 func _ready() -> void:
-	#dmgArea.register(chtr)
-	pass
+	dmgArea.register(chtr)
 
 #var start : int
 func enter(..._args)->void:

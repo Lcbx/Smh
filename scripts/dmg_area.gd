@@ -23,6 +23,7 @@ class_name DmgArea
 		update()
 
 func update()->void:
+	_impulse = Vector2.RIGHT.rotated(deg_to_rad(angle)) * impulse
 	update_line(damage, Color.RED)
 	update_line(impulse, Color.BLUE)
 	update_line(hitstun * 20.0, Color.GREEN)
@@ -32,12 +33,16 @@ func update()->void:
 var _impulse : Vector2
 
 func _ready() -> void:
-	_impulse = Vector2.RIGHT.rotated(deg_to_rad(angle)) * impulse
+	# use prefab instead of setting those fields in ready
+	#self.monitorable = false
+	#self.monitoring = false
+	#self.collision_layer = 0
+	#self.collision_mask = 2
 	if Engine.is_editor_hint():
 		for c in self.get_children():
 			if c.name.begins_with(debugLineName):
 				c.queue_free()
-		update()
+	update()
 
 var _chtr : Character
 func register(chtr:Character, ...args)->void:
@@ -68,7 +73,7 @@ const debugLineSize := 1.5
 const debugLineLength := 5.0
 
 func update_line(value:float, color:Color)->void:
-	if Engine.is_editor_hint() and value > 0.0:
+	if Engine.is_editor_hint() and get_parent() and value > 0.0:
 		var name := debugLineName + color.to_html()
 		var line := self.get_node_or_null(name) as Line2D
 		if line == null:
