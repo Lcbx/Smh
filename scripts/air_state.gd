@@ -23,6 +23,10 @@ func _enter_tree() -> void:
 	FALL_GRAVITY = (2*JUMP_HEIGHT)/pow(JUMP_FALL_TIME,2)
 	JUMP_IMPULSE = calculate_jump_impulse(JUMP_HEIGHT) #RISING_GRAVITY * JUMP_RISING_TIME
 	MAX_FALL_SPEED = FALL_GRAVITY * JUMP_FALL_TIME
+	#print("RISING_GRAVITY ", RISING_GRAVITY)
+	#print("FALL_GRAVITY ", FALL_GRAVITY)
+	#print("JUMP_IMPULSE ", JUMP_IMPULSE)
+	#print("MAX_FALL_SPEED ", MAX_FALL_SPEED)
 
 func calculate_jump_impulse(jump_height:float) ->float:
 	return sqrt( 2. * RISING_GRAVITY * jump_height )
@@ -57,7 +61,7 @@ func apply_movement(delta: float)->void:
 	var direction := chtr.stick_direction
 	#if chtr.jump_requested: direction.y = -1
 	
-	acceleration.x = Character.caculate_lerp_offset(velocity.x, SPEED * direction.x, ACCELERATION_LERP * delta)
+	acceleration.x = Character.calculate_lerp_offset(velocity.x, SPEED * direction.x, ACCELERATION_LERP * delta)
 	
 	var floatiness_modifier := 0.1 if sign(direction.y) < 0 else 0.5
 	var gravity := RISING_GRAVITY if velocity.y < 0 else FALL_GRAVITY

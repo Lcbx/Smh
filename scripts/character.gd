@@ -29,6 +29,19 @@ var velocity := Vector2.ZERO
 
 var last_collision : KinematicCollision2D = null
 
+# impulse from damage, applied in movement
+var impulse := Vector2.ZERO
+
+# all characters stocks start with 100 health
+# damage is substracted to it
+# the lower it is the more knockback is taken (but hitstun is not affected)
+# once under 1 character is stunned for a while, before it resets to 50
+var health := 100.0 :
+	set(value):
+		health_changed.emit(value)
+		health = value
+signal health_changed(value:float)
+
 #TODO: create abstract class for State
 @onready var _state = AIR_STATE
 signal input
@@ -36,24 +49,9 @@ signal input
 func _physics_process(delta: float) -> void:
 	input.emit() # gather input
 	_state.apply(delta)
-
-# framerate independent lerp
-# use as a = const_lerp(a, b, speed * dt) each frame
-# see https://www.youtube.com/watch?v=LSNQuFEDOyQ
-static func const_lerp2(a : Vector2, b : Vector2, amount:float) -> Vector2:
-	return lerp(a, b, 1-exp(-amount))
-
-static func const_lerp(a:float, b:float, amount:float)->float:
-	return lerpf(a, b, 1-exp(-amount))
-	
-static func caculate_lerp_offset2(from:Vector2, to:Vector2, amount:float) -> Vector2:
-	return const_lerp2(from, to, amount) - from
-
-static func caculate_lerp_offset(from:float, to:float, amount:float) -> float:
-	return const_lerp(from, to, amount) - from
 	
 func is_grounded() -> bool:
-	return ground_check.is_colliding()
+	return ground_check.is_colliding() and (ground_check.get_collider() as Character == null)
 
 func apply_movement(speed : Vector2, acceleration : Vector2, delta:float, slide_else_bounce:bool=true) -> void:
 	
@@ -69,8 +67,6 @@ func apply_movement(speed : Vector2, acceleration : Vector2, delta:float, slide_
 	#print(name, " velocity ", velocity)
 	#print(name, " position ", position)
 	
-	# NOTE: maybe we should check if collision is with other character and add a small force tos eparate them
-	
 	# simple move_and_slide implementation 
 	var move := speed * delta
 	last_collision = move_and_collide(move)
@@ -84,9 +80,30 @@ func apply_movement(speed : Vector2, acceleration : Vector2, delta:float, slide_
 			second_move += remaining.bounce(normal)
 			speed = speed.bounce(normal)
 			# try to avoid pinballing
-			speed.x *= 0.6
+			speed.x *= 0.4
 			#half_acceleration = Vector2.ZERO
 		move_and_collide(second_move)
+	
+	elif is_grounded():
+		const ON_GROUND_MARGIN := 5.0
+		const MANTLING_SLERP := 15.0
+		var ground_dist : Vector2 = ground_check.global_position + ground_check.target_position - ground_check.get_collision_point()
+		#print("ground_dist ", ground_dist)
+		if ground_dist.y > ON_GROUND_MARGIN:
+			#print("height adjustment !", ground_dist)
+			# NOTE: target_pos is more or less constant throughout frames
+			var target_pos := position.y - ground_dist.y
+			var traveled := calculate_lerp_offset( position.y, target_pos, MANTLING_SLERP * delta)
+			move_and_collide(Vector2(0, traveled))
+	else:
+		const DFLT_SHOVE_DIST := 100.0
+		const SHOVE_SLERP := 3.0
+		# if ground raycast is on other character, shove ourselves away 
+		var char_collider := ground_check.get_collider() as Character
+		if char_collider:
+			var target_pos : Vector2 = position + sign(position - char_collider.position) * DFLT_SHOVE_DIST
+			var traveled := self.calculate_lerp_offset2( position, target_pos, SHOVE_SLERP * delta)
+			move_and_collide(traveled)
 	
 	velocity = speed + half_acceleration
 
@@ -128,24 +145,17 @@ var flipped : bool :
 		collision.scale.x = -1.0 if value else 1.0
 
 
-# all characters have 100 total health
-# damage is substracted to it
-# the lower it is the more knockback is taken (but hitstun is not affected)
-var health := 100.0
+# framerate independent lerp
+# use as a = const_lerp(a, b, speed * dt) each frame
+# see https://www.youtube.com/watch?v=LSNQuFEDOyQ
+static func const_lerp2(a : Vector2, b : Vector2, amount:float) -> Vector2:
+	return lerp(a, b, 1-exp(-amount))
 
-# impulse from damage, applied in movement
-var impulse := Vector2.ZERO
+static func const_lerp(a:float, b:float, amount:float)->float:
+	return lerpf(a, b, 1-exp(-amount))
+	
+static func calculate_lerp_offset2(from:Vector2, to:Vector2, amount:float) -> Vector2:
+	return const_lerp2(from, to, amount) - from
 
-const ON_GROUND_MARGIN := 5.0
-const MANTLING_SLERP := 15.0
-func ground_repulsion(delta:float)->void:
-	# ! only use when grounded !
-	#if not is_grounded(): return
-	var ground_dist : Vector2 = ground_check.global_position + ground_check.target_position - ground_check.get_collision_point()
-	#print("ground_dist ", ground_dist)
-	if ground_dist.y > ON_GROUND_MARGIN:
-		#print("height adjustment !", ground_dist)
-		# NOTE: target_pos is more or less constant throughout frames
-		var target_pos := position.y - ground_dist.y
-		var traveled := caculate_lerp_offset( position.y, target_pos, MANTLING_SLERP * delta)
-		move_and_collide(Vector2(0, traveled))
+static func calculate_lerp_offset(from:float, to:float, amount:float) -> float:
+	return const_lerp(from, to, amount) - from

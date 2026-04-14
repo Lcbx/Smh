@@ -21,7 +21,11 @@ var move: bool
 @onready var dmgArea:DmgArea = $dmgArea2D
 
 func _ready() -> void:
-	dmgArea.register(chtr)
+	dmgArea.register(chtr, handle_dmg_area)
+
+func handle_dmg_area(body:CollisionObject2D) -> void:
+	dmgArea.handle(body)
+	interrupt()
 
 #var start : int
 func enter(..._args)->void:
@@ -52,6 +56,7 @@ func start_moving():
 func end()->void:
 	chtr.collision.rotation = 0.0
 	chtr.check_state()
+	dmgArea.clearVictims()
 	#print("elapsed ", Time.get_ticks_msec() - start)
 
 func apply(delta: float)->void:
@@ -59,7 +64,7 @@ func apply(delta: float)->void:
 	
 	var speed := chtr.velocity
 	var offset := (
-		Character.caculate_lerp_offset2(speed,
+		Character.calculate_lerp_offset2(speed,
 		cruise_speed * direction
 		#if move else Vector2.ZERO
 		, lerp_strength*delta)
@@ -71,4 +76,4 @@ func apply(delta: float)->void:
 func interrupt()->void:
 	var remaining := chtr.animation_player.current_animation_length - chtr.animation_player.current_animation_position
 	if remaining > ending_lag:
-		chtr.animation_player.advance( remaining - ending_lag )
+		chtr.animation_player.advance.bind( remaining - ending_lag ).call_deferred()

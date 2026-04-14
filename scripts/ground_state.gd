@@ -44,9 +44,7 @@ func apply_movement(delta:float)->void:
 	
 	if velocity.x * direction.x < MIN_SPEED:
 		velocity.x = direction.x * MIN_SPEED
-	acceleration.x = Character.caculate_lerp_offset(velocity.x, SPEED * direction.x, ACCELERATION_LERP * delta)
-	
-	chtr.ground_repulsion(delta)
+	acceleration.x = Character.calculate_lerp_offset(velocity.x, SPEED * direction.x, ACCELERATION_LERP * delta)
 	
 	velocity.y = 0.0
 	chtr.apply_movement(velocity, acceleration, delta)

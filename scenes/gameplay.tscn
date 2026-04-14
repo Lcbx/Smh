@@ -122,7 +122,6 @@ position = Vector2(745.60803, 409.32135)
 
 [node name="Character2" parent="." unique_id=1798693098 instance=ExtResource("8_0m7cd")]
 position = Vector2(984, 610)
-scale = Vector2(-1, 1)
 
 [node name="Timer" type="Timer" parent="." unique_id=266649587]
 wait_time = 4.0

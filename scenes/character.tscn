@@ -10,6 +10,16 @@
 [ext_resource type="Script" uid="uid://b6es8sloopvsk" path="res://scripts/jump_state.gd" id="10_2hyy3"]
 [ext_resource type="Script" uid="uid://c31v5g0erup81" path="res://scripts/punch_state.gd" id="11_irmqu"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0dpix"]
+bg_color = Color(1, 0.34214196, 0.28677168, 1)
+
+[sub_resource type="GDScript" id="GDScript_0dpix"]
+script/source = "extends ProgressBar
+
+func _on_character_health_changed(value_:float) -> void:
+	self.value = value_
+"
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_a5ia6"]
 radius = 17.0
 height = 44.0
@@ -2963,6 +2973,17 @@ collision_layer = 2
 collision_mask = 3
 script = ExtResource("1_wdpcj")
 
+[node name="HealthBar" type="ProgressBar" parent="." unique_id=1588882690]
+z_index = 50
+offset_left = -51.0
+offset_top = 101.0
+offset_right = 49.0
+offset_bottom = 128.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_0dpix")
+step = 0.1
+value = 100.0
+script = SubResource("GDScript_0dpix")
+
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=1393552245]
 polygon = PackedVector2Array(-5.0510406, -51.13327, 11.00386, -52.301384, 17.616806, -33.936844, 30.807266, -23.446213, 20.038803, 10.495178, 0.23703003, 38.669403, -24.080559, -1.1776505, -23.4729, -28.527779, -8.2343445, -35.260185)
 
@@ -2986,7 +3007,6 @@ script = ExtResource("11_irmqu")
 [node name="dmgArea2D" parent="CollisionPolygon2D/PunchState" unique_id=2075851471 instance=ExtResource("6_2cgup")]
 position = Vector2(60, -15)
 collision_mask = 2
-impulse = 3.0
 
 [node name="start" type="CollisionShape2D" parent="CollisionPolygon2D/PunchState/dmgArea2D" unique_id=893044391]
 position = Vector2(-37, 9)
@@ -3014,7 +3034,7 @@ script = ExtResource("7_a5ia6")
 [node name="dmgArea2D" parent="CollisionPolygon2D/AirKickState" unique_id=2145299206 instance=ExtResource("6_2cgup")]
 collision_mask = 2
 damage = 7.0
-impulse = 1.5
+impulse = 2.0
 angle = 80.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionPolygon2D/AirKickState/dmgArea2D" unique_id=1623963863]
@@ -3123,3 +3143,5 @@ unique_name_in_owner = true
 process_callback = 0
 wait_time = 0.3
 one_shot = true
+
+[connection signal="health_changed" from="." to="HealthBar" method="_on_character_health_changed"]

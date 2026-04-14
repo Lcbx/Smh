@@ -18,10 +18,10 @@ func enter(..._args)->void:
 
 func end()->void:
 	chtr.check_state()
+	dmgArea.clearVictims()
 	#print("elapsed ", Time.get_ticks_msec() - start)
 
 func apply(delta: float)->void:
-	#var accel = Vector2( Character.caculate_lerp_offset(chtr.velocity.x, 0.0, friction_lerp * delta), 0.0)
+	#var accel = Vector2( Character.calculate_lerp_offset(chtr.velocity.x, 0.0, friction_lerp * delta), 0.0)
 	var speed := chtr.velocity
-	chtr.ground_repulsion(delta)
 	chtr.apply_movement(speed, Vector2( -signf(speed.x) * friction * delta, 0.0), delta)

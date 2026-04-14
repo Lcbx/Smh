@@ -1,6 +1,8 @@
 extends Node2D
 
 @onready var player:Character = $Character
+@onready var opponent:Character = $Character2
+
 @onready var stageArea:Area2D = $StageArea
 @onready var respawn_point:Node2D = $respawnPoint
 
@@ -9,6 +11,7 @@ extends Node2D
 func _ready() -> void:
 	player.input.connect(gatherInput)
 	stageArea.body_exited.connect(_on_stage_exit)
+	opponent.collision.scale.x = -1.0
 	#print('immediate_respawn ', immediate_respawn)
 
 #TODO: implement input buffer in Character
@@ -41,6 +44,7 @@ func _on_stage_exit(body: Node2D) -> void:
 	if body is Character and immediate_respawn:
 		# TODO : clear all statuses, add some invincibility frames
 		body.velocity = Vector2.ZERO
+		body.health = 100.0
 		body.enter(body.GROUND_STATE)
 		body.teleport(respawn_point.position)
 
