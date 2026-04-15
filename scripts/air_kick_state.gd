@@ -23,8 +23,8 @@ var move: bool
 func _ready() -> void:
 	dmgArea.register(chtr, handle_dmg_area)
 
-func handle_dmg_area(body:CollisionObject2D) -> void:
-	dmgArea.handle(body)
+func handle_dmg_area(body_rid: RID, body: CollisionObject2D, body_shape_index: int, local_shape_index: int) -> void:
+	dmgArea.handle(body_rid, body, body_shape_index, local_shape_index)
 	interrupt()
 
 #var start : int

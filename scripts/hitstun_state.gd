@@ -10,7 +10,7 @@ var duration : float
 
 func enter(...args) -> void:
 	duration = args[0]
-	print(duration)
+	#print(duration)
 	chtr.animate(HITSTUN, duration, 0.05)
 
 func apply(delta: float) -> void:

@@ -47,14 +47,15 @@ func _ready() -> void:
 var _chtr : Character
 func register(chtr:Character, ...args)->void:
 	_chtr = chtr
-	self.body_entered.connect(args[0] if args else handle)
+	self.body_shape_entered.connect(args[0] if args else handle)
 
 # using a dict as a set
 var victims := {}
 func clearVictims()->void:
 	victims.clear()
 
-func handle(body:CollisionObject2D)->void:
+@onready var visual_tween : Tween
+func handle(body_rid: RID, body: CollisionObject2D, body_shape_index: int, local_shape_index: int) -> void:
 	var victim := body as Character
 	var final_impulse = _impulse * _chtr.collision.scale 
 	
@@ -65,6 +66,31 @@ func handle(body:CollisionObject2D)->void:
 		else:
 			victim.impulse += final_impulse
 		if !multi_hit: victims[victim] = null
+		
+		# wtf is this insanity
+		var body_shape_owner := body.shape_find_owner(body_shape_index)
+		var body_shape_node := body.shape_owner_get_owner(body_shape_owner) as CollisionShape2D
+
+		var local_shape_owner := shape_find_owner(local_shape_index)
+		var local_shape_node := shape_owner_get_owner(local_shape_owner) as CollisionShape2D
+		
+		var contacts :PackedVector2Array = local_shape_node.shape.collide_and_get_contacts(global_transform, body_shape_node.shape, body_shape_node.global_transform)
+		var avg := Vector2.ZERO
+		for c in contacts:
+			avg += c
+		avg /= float(contacts.size())
+		if visual_tween: visual_tween.kill()
+		victim.damage_sprite.global_position = avg
+		victim.damage_sprite.rotation = randf() * PI
+		victim.damage_sprite.set_instance_shader_parameter("instance_shader_parameters/albedo:a", 0.0)
+		visual_tween = create_tween()
+		#visual_tween.parallel()
+		#victim.damage_sprite.scale = Vector2.ZERO
+		#visual_tween.tween_property(victim.damage_sprite, "scale", Vector2.ONE * 0.2, 0.05)
+		visual_tween.tween_property(victim.damage_sprite, "instance_shader_parameters/albedo:a",1.0, 0.1)
+		#visual_tween.chain()
+		visual_tween.tween_property(victim.damage_sprite, "instance_shader_parameters/albedo:a",0.0, 0.2)
+
 
 const debugLineName := "debug_line_"
 const debugLineSize := 1.5

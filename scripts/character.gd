@@ -4,7 +4,8 @@ extends PhysicsBody2D
 @onready var animation_player: AnimationPlayer = %AnimationPlayer
 @onready var ground_check: RayCast2D = %ground_check
 @onready var sprite: Node2D = %sprite
-@onready var collision: CollisionPolygon2D = $CollisionPolygon2D
+@onready var damage_sprite : Sprite2D = %dmgSprite
+@onready var collision: CollisionShape2D = $CollisionShape2D
 
 @onready var GROUND_STATE : State = %GroundState
 @onready var AIR_STATE : State = %AirState
@@ -109,13 +110,13 @@ func apply_movement(speed : Vector2, acceleration : Vector2, delta:float, slide_
 
 func animate(anim_name:StringName, time:float=1.0, blend_time:float = 0.2)->void:
 	var speed = 1.0 / max(time, 0.1) # speed is 1.0 / time if anim duration is 1. second
-	if anim_name != animation_player.current_animation:
-		print(self.name, " play ", anim_name, "/", blend_time, "/", speed)
+	#if anim_name != animation_player.current_animation:
+	#	print(self.name, " play ", anim_name, "/", blend_time, "/", speed)
 	animation_player.play(anim_name, blend_time, speed)
 	#animation_player.advance(0)
 
 func enter(state : State, ...args)->void:
-	print(name, ' ', state.name)
+	#print(name, ' ', state.name)
 	self._state = state
 	_state.enter.callv(args)
 	#if Engine.is_in_physics_frame():
